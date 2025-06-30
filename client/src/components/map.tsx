@@ -159,34 +159,35 @@ export function Map({ onSchoolsLoad }: MapProps) {
     // Use timeout to ensure map is fully rendered
     const timer = setTimeout(() => {
       if (mapInstanceRef.current) {
-        // For immediate display, place all schools around Alicante center with small offsets
-        const schoolsWithCoords = data.map((school, index) => {
-          if (school.lat && school.lng) {
-            return school;
-          } else {
-            // Distribute schools in a small grid around Alicante center
-            const baseLatitude = 38.3452;
-            const baseLongitude = -0.4815;
-            const gridSize = Math.ceil(Math.sqrt(data.length));
-            const spacing = 0.005;
-            
-            const row = Math.floor(index / gridSize);
-            const col = index % gridSize;
-            
-            return {
-              ...school,
-              lat: baseLatitude + (row - gridSize/2) * spacing,
-              lng: baseLongitude + (col - gridSize/2) * spacing
-            };
-          }
-        });
+        // Use geocoded data if available, otherwise use temporary grid placement
+        const schoolsToDisplay = allSchoolsGeocoded.length > 0 ? allSchoolsGeocoded : 
+          data.map((school, index) => {
+            if (school.lat && school.lng) {
+              return school;
+            } else {
+              // Distribute schools in a small grid around Alicante center
+              const baseLatitude = 38.3452;
+              const baseLongitude = -0.4815;
+              const gridSize = Math.ceil(Math.sqrt(data.length));
+              const spacing = 0.005;
+              
+              const row = Math.floor(index / gridSize);
+              const col = index % gridSize;
+              
+              return {
+                ...school,
+                lat: baseLatitude + (row - gridSize/2) * spacing,
+                lng: baseLongitude + (col - gridSize/2) * spacing
+              };
+            }
+          });
         
-        loadSchoolMarkers(schoolsWithCoords);
+        loadSchoolMarkers(schoolsToDisplay);
       }
     }, 200);
     
     return () => clearTimeout(timer);
-  }, [data, onSchoolsLoad]);
+  }, [data, onSchoolsLoad, allSchoolsGeocoded]);
 
   const createCustomIcon = (school: School) => {
     let color = '#374151'; // Default black
@@ -321,9 +322,22 @@ export function Map({ onSchoolsLoad }: MapProps) {
   return (
     <div className="relative w-full h-[calc(100vh-4rem)]">
       <div ref={mapRef} className="w-full h-full bg-gray-100" style={{ minHeight: '500px' }} />
-      {/* Debug info */}
-      <div className="absolute top-2 left-2 bg-black text-white p-2 text-xs z-[1000]">
-        Map: {mapInstanceRef.current ? 'Initialized' : 'Not initialized'} | Schools: {data?.length || 0}
+      {/* Debug info and geocoding controls */}
+      <div className="absolute top-2 left-2 bg-black text-white p-2 text-xs z-[1000] space-y-2">
+        <div>Map: {mapInstanceRef.current ? 'Initialized' : 'Not initialized'} | Schools: {data?.length || 0}</div>
+        {data && !isGeocoding && (
+          <button 
+            onClick={() => data && geocodeAllSchools(data)}
+            className="bg-blue-600 text-white px-3 py-1 rounded text-xs hover:bg-blue-700"
+          >
+            Geocode All Schools
+          </button>
+        )}
+        {isGeocoding && (
+          <div className="text-yellow-300">
+            Geocoding: {geocodingProgress}%
+          </div>
+        )}
       </div>
     </div>
   );
