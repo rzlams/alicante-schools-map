@@ -1,9 +1,37 @@
 /* Import Leaflet CSS */
-@import 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+@import "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom styles for school markers */
+.custom-school-marker {
+  background: transparent !important;
+  border: none !important;
+}
+
+.custom-school-marker div {
+  transition: transform 0.2s ease-in-out !important;
+}
+
+.custom-school-marker:hover div {
+  transform: scale(1.1) !important;
+}
+
+/* Custom styles for reference marker */
+.custom-reference-marker {
+  background: transparent !important;
+  border: none !important;
+}
+
+.custom-reference-marker div {
+  transition: transform 0.2s ease-in-out !important;
+}
+
+.custom-reference-marker:hover div {
+  transform: rotate(45deg) scale(1.1) !important;
+}
 
 /* Map container styles */
 .leaflet-container {
@@ -69,14 +97,15 @@
   }
 
   body {
-    @apply font-sans antialiased bg-background text-foreground;
+    @apply bg-background font-sans text-foreground antialiased;
   }
 }
 
 /* Leaflet popup customizations */
 .leaflet-popup-content-wrapper {
   border-radius: 8px;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 .leaflet-popup-content {
@@ -93,5 +122,5 @@
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
