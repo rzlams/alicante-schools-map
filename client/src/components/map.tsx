@@ -52,6 +52,15 @@ export function Map({ onSchoolsLoad }: MapProps) {
             maxZoom: 19
           }).addTo(map);
           
+          // Force map to resize and refresh
+          setTimeout(() => {
+            map.invalidateSize();
+            
+            // Add a test marker to verify map is working
+            L.marker([38.3452, -0.4815]).addTo(map)
+              .bindPopup('Alicante Center - Test Marker');
+          }, 100);
+          
           console.log('Map initialized successfully');
         } catch (error) {
           console.error('Error initializing map:', error);
@@ -295,7 +304,7 @@ export function Map({ onSchoolsLoad }: MapProps) {
     console.log(`Added ${markersAdded} markers out of ${schoolsData.length} schools`);
   };
 
-  if (isLoading) {
+  if (false) { // Temporarily disable loading state
     return (
       <div className="relative w-full h-[calc(100vh-4rem)]">
         <div ref={mapRef} className="w-full h-full" />
@@ -311,7 +320,11 @@ export function Map({ onSchoolsLoad }: MapProps) {
 
   return (
     <div className="relative w-full h-[calc(100vh-4rem)]">
-      <div ref={mapRef} className="w-full h-full bg-gray-100" />
+      <div ref={mapRef} className="w-full h-full bg-gray-100" style={{ minHeight: '500px' }} />
+      {/* Debug info */}
+      <div className="absolute top-2 left-2 bg-black text-white p-2 text-xs z-[1000]">
+        Map: {mapInstanceRef.current ? 'Initialized' : 'Not initialized'} | Schools: {data?.length || 0}
+      </div>
     </div>
   );
 }
