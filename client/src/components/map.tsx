@@ -140,31 +140,43 @@ export function Map({ onSchoolsLoad }: MapProps) {
     return geocodedSchools;
   };
 
+  // Wait for both map and data to be ready
   useEffect(() => {
-    if (data && mapInstanceRef.current) {
-      onSchoolsLoad(data);
-      
-      // For now, skip geocoding and just display schools at center for immediate map display
-      // Use temporary placeholder coordinates for all schools
-      const schoolsWithCoords = data.map((school, index) => {
-        if (school.lat && school.lng) {
-          return school;
-        } else {
-          // Place around Alicante center with small offset
-          const baseLatitude = 38.3452;
-          const baseLongitude = -0.4815;
-          const offset = 0.01;
-          
-          return {
-            ...school,
-            lat: baseLatitude + (Math.random() - 0.5) * offset,
-            lng: baseLongitude + (Math.random() - 0.5) * offset
-          };
-        }
-      });
-      
-      loadSchoolMarkers(schoolsWithCoords);
-    }
+    if (!data || !mapInstanceRef.current) return;
+    
+    console.log('Loading schools with data:', data.length);
+    onSchoolsLoad(data);
+    
+    // Use timeout to ensure map is fully rendered
+    const timer = setTimeout(() => {
+      if (mapInstanceRef.current) {
+        // For immediate display, place all schools around Alicante center with small offsets
+        const schoolsWithCoords = data.map((school, index) => {
+          if (school.lat && school.lng) {
+            return school;
+          } else {
+            // Distribute schools in a small grid around Alicante center
+            const baseLatitude = 38.3452;
+            const baseLongitude = -0.4815;
+            const gridSize = Math.ceil(Math.sqrt(data.length));
+            const spacing = 0.005;
+            
+            const row = Math.floor(index / gridSize);
+            const col = index % gridSize;
+            
+            return {
+              ...school,
+              lat: baseLatitude + (row - gridSize/2) * spacing,
+              lng: baseLongitude + (col - gridSize/2) * spacing
+            };
+          }
+        });
+        
+        loadSchoolMarkers(schoolsWithCoords);
+      }
+    }, 200);
+    
+    return () => clearTimeout(timer);
   }, [data, onSchoolsLoad]);
 
   const createCustomIcon = (school: School) => {
@@ -297,5 +309,9 @@ export function Map({ onSchoolsLoad }: MapProps) {
     );
   }
 
-  return <div ref={mapRef} className="w-full h-[calc(100vh-4rem)]" />;
+  return (
+    <div className="relative w-full h-[calc(100vh-4rem)]">
+      <div ref={mapRef} className="w-full h-full bg-gray-100" />
+    </div>
+  );
 }
