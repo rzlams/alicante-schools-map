@@ -1,0 +1,704 @@
+[
+  {
+    "name": "AUSÍAS MARCH",
+    "address": "Calle Ceres, 24, C.P. 03009",
+    "phone": "965 91 90 30",
+    "email": "03001544@edu.gva.es"
+  },
+  {
+    "name": "AZORÍN",
+    "address": "Calle Biólogo Konrad Lorenz, 5, C.P. 03015",
+    "phone": "965 93 25 10",
+    "email": "03009683@edu.gva.es"
+  },
+  {
+    "name": "BENALÚA",
+    "address": "Calle Doctor Just, 70, C.P. 03007",
+    "phone": "965 91 90 40",
+    "email": "03000734@edu.gva.es"
+  },
+  {
+    "name": "CAMPOAMOR",
+    "address": "Paseo de Campoamor, 1, C.P. 03010",
+    "phone": "965 91 97 30",
+    "email": "03001601@edu.gva.es"
+  },
+  {
+    "name": "CARLOS ARNICHES",
+    "address": "Calle Alonso Cano, 19, C.P. 03014",
+    "phone": "965 91 97 40",
+    "email": "03001571@edu.gva.es"
+  },
+  {
+    "name": "COSTA BLANCA",
+    "address": "Avda. de las Naciones, 9, C.P. 03450",
+    "phone": "965 91 97 50",
+    "email": "03015661@edu.gva.es"
+  },
+  {
+    "name": "EL FARO",
+    "address": "Calle Sargo, 4, C.P. 03540",
+    "phone": "965 93 73 90",
+    "email": "03015351@edu.gva.es"
+  },
+  {
+    "name": "EL PALMERAL",
+    "address": "Calle Portet de Moraira, 2, C.P. 03008",
+    "phone": "965 91 97 60",
+    "email": "03011161@edu.gva.es"
+  },
+  {
+    "name": "EL TOSSAL",
+    "address": "Calle Juanito Santero, 3, C.P. 03005",
+    "phone": "965 91 97 70",
+    "email": "03009749@edu.gva.es"
+  },
+  {
+    "name": "EL TOSSALET",
+    "address": "Calle Cronista Vicente Martínez Morella, s/n, C.P. 03014",
+    "phone": "965 93 62 00",
+    "email": "03009968@edu.gva.es"
+  },
+  {
+    "name": "EMILIO VARELA",
+    "address": "Calle Del Clot, 10, C.P. 03011",
+    "phone": "965 91 97 80",
+    "email": "03010193@edu.gva.es"
+  },
+  {
+    "name": "ENRIC VALOR",
+    "address": "Calle San Lorenzo, 33, C.P. 03007",
+    "phone": "965 91 97 90",
+    "email": "03011987@edu.gva.es"
+  },
+  {
+    "name": "EUSEBIO SEMPERE",
+    "address": "Calle Isidoro Sevilla, 2, C.P. 03009",
+    "phone": "965 93 62 10",
+    "email": "03000692@edu.gva.es"
+  },
+  {
+    "name": "FLORIDA",
+    "address": "Calle Pianista Gonzalo Soriano, 3, C.P. 03007",
+    "phone": "965 93 62 20",
+    "email": "03001581@edu.gva.es"
+  },
+  {
+    "name": "GABRIEL MIRÓ",
+    "address": "Calle Profesor David Noguera, 2, C.P. 03006",
+    "phone": "965 93 62 30",
+    "email": "03010201@edu.gva.es"
+  },
+  {
+    "name": "GASTON CASTELLÓ",
+    "address": "Calle Claudio Coello, 2, C.P. 03010",
+    "phone": "965 93 62 40",
+    "email": "03011859@edu.gva.es"
+  },
+  {
+    "name": "GLORIA FUERTES",
+    "address": "Calle Cuarzo, 19, C.P. 03014",
+    "phone": "965 93 62 50",
+    "email": "03015191@edu.gva.es"
+  },
+  {
+    "name": "ISLA DE TABARCA",
+    "address": "Calle Benifallín, 4",
+    "phone": "965 93 62 60",
+    "email": "03016183@edu.gva.es"
+  },
+  {
+    "name": "JOAQUÍN SOROLLA",
+    "address": "Calle Albacete, s/n, C.P. 03006",
+    "phone": "965 93 62 70",
+    "email": "03001568@edu.gva.es"
+  },
+  {
+    "name": "JOSE CARLOS AGUILERA",
+    "address": "Calle Médico Pedro Herrero, s/n, C.P. 03006",
+    "phone": "965 93 62 80",
+    "email": "03010181@edu.gva.es"
+  },
+  {
+    "name": "JUAN BAUTISTA LLORCA",
+    "address": "Calle Py y Margall, 2 (Villafranqueza), C.P. 03112",
+    "phone": "965 91 87 05",
+    "email": "03002317@edu.gva.es"
+  },
+  {
+    "name": "LA ALBUFERETA",
+    "address": "Zeus, 3, C.P. 03016",
+    "phone": "965 93 62 90",
+    "email": "03011045@edu.gva.es"
+  },
+  {
+    "name": "LA ALMADRABA",
+    "address": "Calle Deportista José Bañón, nº 4, C.P. 03540",
+    "phone": "965 93 25 25",
+    "email": "03019007@edu.gva.es"
+  },
+  {
+    "name": "LA CONDOMINA",
+    "address": "Avda. Países Escandinavos, 17, C.P. 03540",
+    "phone": "965 93 63 00",
+    "email": "03002238@edu.gva.es"
+  },
+  {
+    "name": "LA PAZ",
+    "address": "Calle Abogado Pérez Mirete, 1 Bis, C.P. 03011",
+    "phone": "965 93 63 20",
+    "email": "03001623@edu.gva.es"
+  },
+  {
+    "name": "LUCENTUM",
+    "address": "Calle Ortega y Gasset, 21, C.P. 03011",
+    "phone": "965 93 63 10",
+    "email": "03009701@edu.gva.es"
+  },
+  {
+    "name": "MANJÓN-CERVANTES",
+    "address": "Calle Montero Ríos, 2, C.P. 03012",
+    "phone": "965 93 25 15",
+    "email": "03000709@edu.gva.es"
+  },
+  {
+    "name": "MEDITERRÁNEO",
+    "address": "Calle Catedrático Abelardo Rigual, 4, C.P. 03540",
+    "phone": "965 93 73 80",
+    "email": "03017485@edu.gva.es"
+  },
+  {
+    "name": "MONTE BENACANTIL",
+    "address": "Calle Vicente Martínez Morella, 16, C.P. 03015",
+    "phone": "965 91 96 90",
+    "email": "03011057@edu.gva.es"
+  },
+  {
+    "name": "MORA PUCHOL",
+    "address": "Plaza Farmacéutico Luís Gisbert, 4, C.P. 03008",
+    "phone": "965 93 25 00",
+    "email": "03009971@edu.gva.es"
+  },
+  {
+    "name": "NOU D'OCTUBRE",
+    "address": "Calle Pinoso, 27, C.P. 03012",
+    "phone": "965 91 90 20",
+    "email": "03000722@edu.gva.es"
+  },
+  {
+    "name": "OSCAR ESPLÁ",
+    "address": "Plaza de la Libertad nº 1, C.P. 03010",
+    "phone": "965 93 71 05",
+    "email": "03001854@edu.gva.es"
+  },
+  {
+    "name": "PEDRO DUQUE",
+    "address": "Calle Artista Foguerer, 2, C.P. 03015",
+    "phone": "965 91 96 80",
+    "email": "03001507@edu.gva.es"
+  },
+  {
+    "name": "PRÁCTICAS - LA ANEJA",
+    "address": "Cat. Jaume Mas i Porcel, s/n, C.P. 03005",
+    "phone": "965 93 73 60",
+    "email": "03001647@edu.gva.es"
+  },
+  {
+    "name": "RABASSA",
+    "address": "Calle Tubería, 93, C.P. 03009",
+    "phone": "965 93 73 40",
+    "email": "03018623@edu.gva.es"
+  },
+  {
+    "name": "RAFAEL ALTAMIRA",
+    "address": "Calle S.C.D. Betis Florida, 34, C.P. 03007",
+    "phone": "965 93 63 30",
+    "email": "03002101@edu.gva.es"
+  },
+  {
+    "name": "RAMON LLULL",
+    "address": "Calle Santa Felicitas, 8",
+    "phone": "965 93 63 40",
+    "email": "03011173@edu.gva.es"
+  },
+  {
+    "name": "SAN BLAS",
+    "address": "Avda. Doctor Rico, 11, C.P. 03005",
+    "phone": "965 93 63 50",
+    "email": "03010491@edu.gva.es"
+  },
+  {
+    "name": "SAN FERNANDO",
+    "address": "Ciudad Real, 33, C.P. 03005",
+    "phone": "965 93 63 60",
+    "email": "03001490@edu.gva.es"
+  },
+  {
+    "name": "SAN FRANCISCO DE ASÍS",
+    "address": "Calle Cefeo, 82, C.P. 03006",
+    "phone": "965 93 73 70",
+    "email": "03001660@edu.gva.es"
+  },
+  {
+    "name": "SAN GABRIEL",
+    "address": "Calle Músico José Alcaraz, 4, C.P. 03008",
+    "phone": "965 93 63 80",
+    "email": "03001659@edu.gva.es"
+  },
+  {
+    "name": "SAN NICOLÁS DE BARI",
+    "address": "Calle Gral. Ros de Olano, 20, C.P. 03010",
+    "phone": "965 93 63 70",
+    "email": "03009725@edu.gva.es"
+  },
+  {
+    "name": "SAN ROQUE",
+    "address": "Calle Villavieja, 37, C.P. 03002",
+    "phone": "965 93 70 45",
+    "email": "03000710@edu.gva.es"
+  },
+  {
+    "name": "SANTÍSIMA FAZ",
+    "address": "Calle Barítono Paco La Torre, s/n, C.P. 03015",
+    "phone": "965 93 63 90",
+    "email": "03001957@edu.gva.es"
+  },
+  {
+    "name": "SANTO DOMINGO",
+    "address": "Plaza Foguerer Tomás Valcárcel, 10, C.P. 03005",
+    "phone": "965 93 73 00",
+    "email": "03010399@edu.gva.es"
+  },
+  {
+    "name": "VIRGEN DEL REMEDIO",
+    "address": "Calle Las Palmas, 1, C.P. 03014",
+    "phone": "965 93 73 10",
+    "email": "03001672@edu.gva.es"
+  },
+  {
+    "name": "VORAMAR",
+    "address": "Calle Salabre, 9, C.P. 03540",
+    "phone": "965 93 73 20",
+    "email": "03014149@edu.gva.es"
+  },
+  {
+    "name": "BACAROT",
+    "address": "Plaza Madreselva, 8, C.P. 03114",
+    "phone": "965 93 71 45",
+    "email": "03009816@edu.gva.es"
+  },
+  {
+    "name": "LA CAÑADA DEL FENOLLAR",
+    "address": "Carretera de la Alcoraya nº 50, C.P. 03699",
+    "phone": "965 93 70 05",
+    "email": "03002160@edu.gva.es"
+  },
+  {
+    "name": "LOS ALMENDROS",
+    "address": "Calle Iglesia, 2, C.P. 03113",
+    "phone": "965 93 71 10",
+    "email": "03002241@edu.gva.es"
+  },
+  {
+    "name": "VERDEGÁS",
+    "address": "Partida Verdegás",
+    "phone": "965 91 87 40",
+    "email": "03002305@edu.gva.es"
+  },
+  {
+    "name": "LO MORANT",
+    "address": "Calle Pablo Neruda, 7, C.P. 03011",
+    "phone": "965 93 70 20",
+    "email": "03015324@edu.gva.es"
+  },
+  {
+    "name": "SANTO ANGEL DE LA GUARDA",
+    "address": "Calle Virgen del Puig, 17, C.P. 03009",
+    "phone": "965 93 70 25",
+    "email": "03010570@edu.gva.es"
+  },
+  {
+    "name": "EL SOMNI",
+    "address": "Avda. Miguel Hernández 9, San Juan de Alicante (ubicación provisional)",
+    "phone": "965 93 84 70",
+    "email": "03020678@edu.gva.es"
+  },
+  {
+    "name": "AIRE LIBRE",
+    "address": "Azahar, 20, C.P. 03559",
+    "phone": "965 16 48 18",
+    "email": ""
+  },
+  {
+    "name": "ALTOZANO",
+    "address": "Isla de Corfú, 2, C.P. 03005",
+    "phone": "965 92 56 66",
+    "email": ""
+  },
+  {
+    "name": "CALASANCIO",
+    "address": "Avda. Denia, 76, C.P. 03016",
+    "phone": "965 26 25 10",
+    "email": ""
+  },
+  {
+    "name": "CASALARGA",
+    "address": "Plaza García Lorca, 16, C.P. 03015",
+    "phone": "965 18 35 37",
+    "email": ""
+  },
+  {
+    "name": "CEU JESÚS MARÍA",
+    "address": "Caja de Ahorros, 15, C.P. 03016",
+    "phone": "965 26 14 00",
+    "email": ""
+  },
+  {
+    "name": "DON BOSCO",
+    "address": "Avda. Vicente Blasco Ibáñez, 1, C.P. 03005",
+    "phone": "965 92 48 42",
+    "email": ""
+  },
+  {
+    "name": "INMACULADA -JESUITAS",
+    "address": "Avda. Denia, 92, C.P. 03013",
+    "phone": "965 26 81 44",
+    "email": ""
+  },
+  {
+    "name": "JESUS MARÍA - ASÍS",
+    "address": "Algol, 33, C.P. 03006",
+    "phone": "965 28 01 13",
+    "email": ""
+  },
+  {
+    "name": "JESÚS MARÍA - VILLAFRANQUEZA",
+    "address": "Camino de las Parras, 5, C.P. 03112",
+    "phone": "965 18 17 96",
+    "email": ""
+  },
+  {
+    "name": "LA PURÍSIMA Y SAN FRANCISCO",
+    "address": "Padre Recaredo de los Ríos, 53, C.P. 03005",
+    "phone": "965 13 25 19",
+    "email": ""
+  },
+  {
+    "name": "MARÍA AUXILIADORA",
+    "address": "Isla de Corfu, 7, C.P. 03005",
+    "phone": "965 92 62 15",
+    "email": ""
+  },
+  {
+    "name": "MÉDICO PEDRO HERRERO",
+    "address": "Víctor de la Serna, 37, C.P. 03006",
+    "phone": "965 10 24 55",
+    "email": ""
+  },
+  {
+    "name": "NAZARET",
+    "address": "Avda. Dr. Jiménez Díaz, 27, C.P. 03005",
+    "phone": "965 17 18 15",
+    "email": ""
+  },
+  {
+    "name": "NTRA. SRA. DE LOS ÁNGELES",
+    "address": "Pardo Bazán, 8, C.P. 03010",
+    "phone": "965 17 04 17",
+    "email": ""
+  },
+  {
+    "name": "NTRA. SRA DEL REMEDIO",
+    "address": "Paseo de Campoamor, 4, C.P. 03010",
+    "phone": "965 24 69 90",
+    "email": ""
+  },
+  {
+    "name": "SAGRADA FAMILIA",
+    "address": "Fco. Carratalá Cernuda, 13, C.P. 03010",
+    "phone": "965 25 28 75",
+    "email": ""
+  },
+  {
+    "name": "SAGRADO CORAZÓN",
+    "address": "Isla de Corfú, 5, C.P. 03005",
+    "phone": "965 13 09 41",
+    "email": ""
+  },
+  {
+    "name": "SAGRADOS CORAZONES",
+    "address": "Camino Cruz de Piedra, 21, C.P. 03015",
+    "phone": "965 26 17 28",
+    "email": ""
+  },
+  {
+    "name": "SAN AGUSTÍN",
+    "address": "Pintor Pedro Camacho, 2",
+    "phone": "965 15 60 70",
+    "email": ""
+  },
+  {
+    "name": "SAN ANTONIO DE PADUA",
+    "address": "Plaza San Antonio, 1, C.P. 03004",
+    "phone": "965 20 49 00",
+    "email": ""
+  },
+  {
+    "name": "SAN JOSÉ",
+    "address": "Martos, 7, C.P. 03012",
+    "phone": "965 25 47 48",
+    "email": ""
+  },
+  {
+    "name": "SAN JOSÉ DE CAROLINAS",
+    "address": "Garbinet, 87, C.P. 03012",
+    "phone": "965 25 21 90",
+    "email": ""
+  },
+  {
+    "name": "SAN JUAN BAUTISTA",
+    "address": "San Agatángelo, 45, C.P. 03007",
+    "phone": "965 10 00 95",
+    "email": ""
+  },
+  {
+    "name": "SAN JUAN DE LA CRUZ",
+    "address": "General Espartero, 6, C.P. 03012",
+    "phone": "965 24 81 81",
+    "email": ""
+  },
+  {
+    "name": "SANTA Mª DEL CARMEN",
+    "address": "Madre Elisea Oliver, 2, C.P. 03005",
+    "phone": "965 17 47 67",
+    "email": ""
+  },
+  {
+    "name": "SANTA TERESA",
+    "address": "Calle Cruz de Piedra, 1, C.P. 03015",
+    "phone": "965 26 20 00",
+    "email": ""
+  },
+  {
+    "name": "SANTÍSIMO SACRAMENTO FEYDA",
+    "address": "Calle Nou D'Octubre, 1, C.P. 03012",
+    "phone": "965 25 83 56",
+    "email": ""
+  },
+  {
+    "name": "VIRGEN DEL ROSARIO",
+    "address": "Plaza Florida Portazgo, 6, C.P. 03006",
+    "phone": "965 11 01 52",
+    "email": ""
+  },
+  {
+    "name": "ÁNGEL DE LA GUARDA",
+    "address": "Duque de Rivas, 10, C.P. 03016",
+    "phone": "965 26 18 99",
+    "email": ""
+  },
+  {
+    "name": "ESCUELA EUROPEA \"LA CONDOMINA\"",
+    "address": "Avda. Locutor Vicente Hipólito, s/n, C.P. 03540",
+    "phone": "965 26 95 95",
+    "email": ""
+  },
+  {
+    "name": "COLEGIO BRITÁNICO",
+    "address": "Glorieta del Reino Unido, 5, C.P. 03008",
+    "phone": "965 10 63 51",
+    "email": ""
+  },
+  {
+    "name": "EL VALLE",
+    "address": "Avda. de la Condomina 65",
+    "phone": "965 15 56 19",
+    "email": ""
+  },
+  {
+    "name": "8 DE MARZO",
+    "address": "Ciudad de Matanzas s/n, C.P. 03005",
+    "phone": "965 93 65 35",
+    "email": ""
+  },
+  {
+    "name": "ANTONIO J. CAVANILLES",
+    "address": "Avda. Lorenzo Carbonell, 32, C.P. 03007",
+    "phone": "965 93 65 00",
+    "email": ""
+  },
+  {
+    "name": "BAHÍA BABEL",
+    "address": "Paraguay, 6, C.P. 03008",
+    "phone": "965 93 65 65",
+    "email": ""
+  },
+  {
+    "name": "CABO DE LAS HUERTAS",
+    "address": "Avda. Costablanca, 17, C.P. 03540",
+    "phone": "965 93 65 70",
+    "email": ""
+  },
+  {
+    "name": "DOCTOR BALMIS",
+    "address": "La Cerámica, 24, C.P. 03010",
+    "phone": "965 93 65 40",
+    "email": ""
+  },
+  {
+    "name": "EL PLÁ",
+    "address": "Avda. Ciudad León de Nicaragua, 8, C.P. 03012",
+    "phone": "965 93 65 30",
+    "email": ""
+  },
+  {
+    "name": "FIGUERAS PACHECO",
+    "address": "Vicente Chavarri, 35, C.P. 03007",
+    "phone": "965 93 64 95",
+    "email": ""
+  },
+  {
+    "name": "GRAN VÍA",
+    "address": "Alonso Cano, 80, C.P. 03012",
+    "phone": "965 93 65 25",
+    "email": ""
+  },
+  {
+    "name": "JAIME II",
+    "address": "Doctor Cristóbal Pardo, nº 4, C.P. 03015",
+    "phone": "965 93 64 65",
+    "email": ""
+  },
+  {
+    "name": "JORGE JUAN",
+    "address": "Wenceslao Fernández Flores, 2, C.P. 03004",
+    "phone": "965 93 64 90",
+    "email": ""
+  },
+  {
+    "name": "LAS LOMAS",
+    "address": "Barítono Paco Latorre, 1, C.P. 03015",
+    "phone": "965 93 65 85",
+    "email": ""
+  },
+  {
+    "name": "LEONARDO DA VINCI",
+    "address": "Avda. Baronía de Polop, 10, C.P. 03011",
+    "phone": "965 93 65 15",
+    "email": ""
+  },
+  {
+    "name": "MARE NOSTRUM",
+    "address": "Beato Fco. Castelló Aleu, s/n, C.P. 03008",
+    "phone": "965 93 65 20",
+    "email": ""
+  },
+  {
+    "name": "MIGUEL HERNÁNDEZ",
+    "address": "Poeta Garcilaso, 8, C.P. 03005",
+    "phone": "965 93 65 45",
+    "email": ""
+  },
+  {
+    "name": "PLAYA DE SAN JUAN",
+    "address": "Avda. San Sebastián, 39, C.P. 03540",
+    "phone": "965 93 65 80",
+    "email": ""
+  },
+  {
+    "name": "SAN BLAS",
+    "address": "Isla de Corfú, 9, C.P. 03005",
+    "phone": "965 93 65 60",
+    "email": ""
+  },
+  {
+    "name": "RADIO EXTERIOR",
+    "address": "Deportista José Bañón, s/n, C.P. 03540",
+    "phone": "965 93 65 90",
+    "email": ""
+  },
+  {
+    "name": "VIRGEN DEL REMEDIO",
+    "address": "Avda. Baronía de Polop, 8",
+    "phone": "965 93 65 10",
+    "email": ""
+  },
+  {
+    "name": "ALBERTO BARRIOS",
+    "address": "Plaza de las Escuelas, 5, C.P. 03011",
+    "phone": "966 47 86 80",
+    "email": "03012891@edu.gva.es"
+  },
+  {
+    "name": "BABEL",
+    "address": "Avda. Lorenzo Carbonell, 16, C.P. 03007",
+    "phone": "965 91 82 40",
+    "email": "03012864@edu.gva.es"
+  },
+  {
+    "name": "CENTRO MUNICIPAL DE FORMACIÓN DE PERSONAS ADULTAS",
+    "address": "Calle Padre Mariana, 19, C.P. 03004",
+    "phone": "965 14 38 43",
+    "email": "educacion@alicante.es"
+  },
+  {
+    "name": "GINER DE LOS RÍOS",
+    "address": "Calle Dr. Clavero, s/n, C.P. 03012",
+    "phone": "965 91 87 15",
+    "email": "03012888@edu.gva.es"
+  },
+  {
+    "name": "PAULO FREIRE",
+    "address": "Calle Capitán Segarra, 30, C.P. 03004",
+    "phone": "965 91 87 20",
+    "email": "03010715@edu.gva.es"
+  },
+  {
+    "name": "TÓMBOLA",
+    "address": "Travesía Virgen del Puig, s/n, C.P. 03009",
+    "phone": "965 91 83 40",
+    "email": "03012876@edu.gva.es"
+  },
+  {
+    "name": "CONSERVATORIO PROFESIONAL DE DANZA JOSE ESPADERO",
+    "address": "Calle Catedrático Jaume Mas Porcel, C.P. 03005",
+    "phone": "966 47 86 70",
+    "email": "03015038@edu.gva.es"
+  },
+  {
+    "name": "CONSERVATORIO PROFESIONAL DE MÚSICA GUITARRISTA JOSE TOMAS",
+    "address": "Calle San Fernando, 30, C.P. 03001",
+    "phone": "965 93 70 10",
+    "email": "03014678@edu.gva.es"
+  },
+  {
+    "name": "CONSERVATORIO SUPERIOR DE DANZA",
+    "address": "Calle Catedrático Jaume Mas Porcel, s/n, C.P. 03005",
+    "phone": "965 91 87 45",
+    "email": "03016134@edu.gva.es"
+  },
+  {
+    "name": "CONSERVATORIO SUPERIOR DE MÚSICA OSCAR ESPLÁ",
+    "address": "Calle Catedrático Jaume Mas Porcel, s/n, C.P. 03005",
+    "phone": "966 47 86 65",
+    "email": "03016134@edu.gva.es"
+  },
+  {
+    "name": "ESCUELA DE ARTE Y SUPERIOR DE DISEÑO DE ALICANTE",
+    "address": "Calle del Clot, 8, C.P. 03011",
+    "phone": "965 93 70 30",
+    "email": "03011124@edu.gva.es"
+  },
+  {
+    "name": "ESCUELA OFICIAL DE IDIOMAS",
+    "address": "Calle Marqués de Molins, 56, C.P. 03005",
+    "phone": "965 93 70 15",
+    "email": "03011136@edu.gva.es"
+  },
+  {
+    "name": "IFPS MARÍTIMO PESQUERO DEL MEDITERRÁNEO",
+    "address": "Muelle Pesquero, s/n, C.P. 03001",
+    "phone": "965 69 56 00",
+    "email": "03002007@edu.gva.es"
+  }
+]
