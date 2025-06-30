@@ -42,10 +42,10 @@ export function Map({ onSchoolsLoad }: MapProps) {
   }, []);
 
   useEffect(() => {
-    if (!schools || !mapInstanceRef.current) return;
-
-    onSchoolsLoad(schools);
-    loadSchoolMarkers(schools);
+    if (schools) {
+      onSchoolsLoad(schools);
+      loadSchoolMarkers(schools);
+    }
   }, [schools, onSchoolsLoad]);
 
   const createCustomIcon = (school: School) => {
@@ -125,10 +125,29 @@ export function Map({ onSchoolsLoad }: MapProps) {
     });
     markersRef.current = [];
 
-    // Add markers for schools that have coordinates
-    schools.forEach(school => {
-      if (school.lat && school.lng && mapInstanceRef.current) {
-        const marker = L.marker([school.lat, school.lng], {
+    console.log(`Loading ${schools.length} schools on map`);
+
+    // Add markers for schools - use coordinates if available, otherwise place in Alicante center with offset
+    let markersAdded = 0;
+    schools.forEach((school, index) => {
+      if (mapInstanceRef.current) {
+        let lat, lng;
+        
+        if (school.lat && school.lng) {
+          // Use existing coordinates
+          lat = school.lat;
+          lng = school.lng;
+        } else {
+          // Place around Alicante center with small random offset
+          const baselat = 38.3452;
+          const baseLng = -0.4815;
+          const offsetRange = 0.02; // Small area around center
+          
+          lat = baselat + (Math.random() - 0.5) * offsetRange;
+          lng = baseLng + (Math.random() - 0.5) * offsetRange;
+        }
+        
+        const marker = L.marker([lat, lng], {
           icon: createCustomIcon(school)
         }).addTo(mapInstanceRef.current);
 
@@ -138,8 +157,11 @@ export function Map({ onSchoolsLoad }: MapProps) {
         });
 
         markersRef.current.push(marker);
+        markersAdded++;
       }
     });
+
+    console.log(`Added ${markersAdded} markers out of ${schools.length} schools`);
   };
 
   if (isLoading) {
