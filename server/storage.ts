@@ -1,5 +1,5 @@
 import { schools, users, type School, type InsertSchool, type User, type InsertUser } from "@shared/schema";
-import schoolsData from "../attached_assets/colegios_1751247856681.json";
+import schoolsData from "../attached_assets/schools_with_coords_complete.json";
 
 export interface IStorage {
   getUser(id: number): Promise<User | undefined>;
@@ -33,11 +33,11 @@ export class MemStorage implements IStorage {
         address: schoolData.address,
         phone: schoolData.phone,
         email: schoolData.email,
-        isVisited: false,
-        hasQuota: false,
-        comments: "",
-        lat: null,
-        lng: null,
+        isVisited: schoolData.isVisited,
+        hasQuota: schoolData.hasQuota,
+        comments: schoolData.comments,
+        lat: schoolData.lat,
+        lng: schoolData.lng,
       };
       this.schools.set(school.id, school);
     });

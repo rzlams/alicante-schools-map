@@ -1,7 +1,6 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
 import type { School } from "@/types/school";
-import { geocodeAddress, delay } from "@/lib/geocoding";
 
 // Import Leaflet
 import L from "leaflet";
@@ -15,9 +14,6 @@ export function Map({ onSchoolsLoad }: MapProps) {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<L.Map | null>(null);
   const markersRef = useRef<L.Marker[]>([]);
-  const [isGeocoding, setIsGeocoding] = useState(false);
-  const [geocodingProgress, setGeocodingProgress] = useState({ current: 0, total: 0 });
-  const [geocodedSchools, setGeocodedSchools] = useState<Array<{school: School, lat: number, lng: number}>>([]);
 
 
   const { data: schools, isLoading } = useQuery<School[]>({
@@ -120,11 +116,8 @@ export function Map({ onSchoolsLoad }: MapProps) {
     `;
   };
 
-  const loadSchoolMarkers = async (schools: School[]) => {
+  const loadSchoolMarkers = (schools: School[]) => {
     if (!mapInstanceRef.current) return;
-
-    setIsGeocoding(true);
-    setGeocodingProgress({ current: 0, total: schools.length });
 
     // Clear existing markers
     markersRef.current.forEach(marker => {
@@ -132,26 +125,10 @@ export function Map({ onSchoolsLoad }: MapProps) {
     });
     markersRef.current = [];
 
-    const geocodedResults: Array<{school: School, lat: number, lng: number}> = [];
-
-    for (let i = 0; i < schools.length; i++) {
-      const school = schools[i];
-      
-      let coords = null;
-      
-      // Use existing coordinates if available
-      if (school.lat && school.lng) {
-        coords = { lat: school.lat, lng: school.lng };
-      } else {
-        // Small delay to avoid rate limiting
-        if (i > 0) {
-          await delay(200);
-        }
-        coords = await geocodeAddress(school.address);
-      }
-      
-      if (coords && mapInstanceRef.current) {
-        const marker = L.marker([coords.lat, coords.lng], {
+    // Add markers for schools that have coordinates
+    schools.forEach(school => {
+      if (school.lat && school.lng && mapInstanceRef.current) {
+        const marker = L.marker([school.lat, school.lng], {
           icon: createCustomIcon(school)
         }).addTo(mapInstanceRef.current);
 
@@ -161,52 +138,18 @@ export function Map({ onSchoolsLoad }: MapProps) {
         });
 
         markersRef.current.push(marker);
-        
-        // Store the geocoded result
-        geocodedResults.push({
-          school,
-          lat: coords.lat,
-          lng: coords.lng
-        });
       }
-
-      setGeocodingProgress({ current: i + 1, total: schools.length });
-    }
-
-    setGeocodedSchools(geocodedResults);
-    setIsGeocoding(false);
-
-    // Print the complete JSON data for all schools with coordinates
-    console.log("=== COMPLETE SCHOOLS DATA WITH COORDINATES ===");
-    console.log(JSON.stringify(geocodedResults.map(result => ({
-      name: result.school.name,
-      address: result.school.address,
-      phone: result.school.phone,
-      email: result.school.email,
-      isVisited: false,
-      hasQuota: false,
-      comments: "",
-      lat: result.lat,
-      lng: result.lng
-    })), null, 2));
-    console.log("=== END SCHOOLS DATA ===");
+    });
   };
 
-  if (isLoading || isGeocoding) {
+  if (isLoading) {
     return (
       <div className="relative w-full h-[calc(100vh-4rem)]">
         <div ref={mapRef} className="w-full h-full" />
         <div className="absolute inset-0 bg-white bg-opacity-75 flex items-center justify-center z-[1000]">
           <div className="text-center">
             <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mb-4"></div>
-            <p className="text-gray-600 font-medium">
-              {isLoading ? "Cargando colegios..." : "Geocodificando ubicaciones..."}
-            </p>
-            {isGeocoding && (
-              <p className="text-sm text-gray-500 mt-2">
-                {geocodingProgress.current} / {geocodingProgress.total}
-              </p>
-            )}
+            <p className="text-gray-600 font-medium">Cargando colegios...</p>
           </div>
         </div>
       </div>
