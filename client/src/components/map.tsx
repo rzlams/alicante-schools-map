@@ -25,19 +25,42 @@ export function Map({ onSchoolsLoad }: MapProps) {
   });
 
   useEffect(() => {
-    if (!mapRef.current || mapInstanceRef.current) return;
+    if (!mapRef.current) return;
+    
+    // Clean up existing map if any
+    if (mapInstanceRef.current) {
+      mapInstanceRef.current.remove();
+      mapInstanceRef.current = null;
+    }
 
-    // Initialize map
-    const map = L.map(mapRef.current).setView([38.3452, -0.4815], 12);
-    mapInstanceRef.current = map;
+    // Add a small delay to ensure DOM is ready
+    const timer = setTimeout(() => {
+      if (mapRef.current && !mapInstanceRef.current) {
+        try {
+          // Initialize map
+          const map = L.map(mapRef.current, {
+            center: [38.3452, -0.4815],
+            zoom: 12,
+            zoomControl: true
+          });
+          
+          mapInstanceRef.current = map;
 
-    // Add OpenStreetMap tiles
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      maxZoom: 19
-    }).addTo(map);
+          // Add OpenStreetMap tiles
+          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            maxZoom: 19
+          }).addTo(map);
+          
+          console.log('Map initialized successfully');
+        } catch (error) {
+          console.error('Error initializing map:', error);
+        }
+      }
+    }, 100);
 
     return () => {
+      clearTimeout(timer);
       if (mapInstanceRef.current) {
         mapInstanceRef.current.remove();
         mapInstanceRef.current = null;
@@ -118,26 +141,31 @@ export function Map({ onSchoolsLoad }: MapProps) {
   };
 
   useEffect(() => {
-    if (data) {
+    if (data && mapInstanceRef.current) {
       onSchoolsLoad(data);
       
-      // Check if we need to geocode
-      const needsGeocoding = data.some(school => !school.lat || !school.lng);
+      // For now, skip geocoding and just display schools at center for immediate map display
+      // Use temporary placeholder coordinates for all schools
+      const schoolsWithCoords = data.map((school, index) => {
+        if (school.lat && school.lng) {
+          return school;
+        } else {
+          // Place around Alicante center with small offset
+          const baseLatitude = 38.3452;
+          const baseLongitude = -0.4815;
+          const offset = 0.01;
+          
+          return {
+            ...school,
+            lat: baseLatitude + (Math.random() - 0.5) * offset,
+            lng: baseLongitude + (Math.random() - 0.5) * offset
+          };
+        }
+      });
       
-      if (needsGeocoding && !isGeocoding && allSchoolsGeocoded.length === 0) {
-        // Start geocoding process
-        geocodeAllSchools(data).then(geocodedData => {
-          loadSchoolMarkers(geocodedData);
-        });
-      } else if (allSchoolsGeocoded.length > 0) {
-        // Use already geocoded data
-        loadSchoolMarkers(allSchoolsGeocoded);
-      } else {
-        // Data already has coordinates
-        loadSchoolMarkers(data);
-      }
+      loadSchoolMarkers(schoolsWithCoords);
     }
-  }, [data, onSchoolsLoad, allSchoolsGeocoded, isGeocoding]);
+  }, [data, onSchoolsLoad]);
 
   const createCustomIcon = (school: School) => {
     let color = '#374151'; // Default black
@@ -255,21 +283,14 @@ export function Map({ onSchoolsLoad }: MapProps) {
     console.log(`Added ${markersAdded} markers out of ${schoolsData.length} schools`);
   };
 
-  if (isLoading || isGeocoding) {
+  if (isLoading) {
     return (
       <div className="relative w-full h-[calc(100vh-4rem)]">
         <div ref={mapRef} className="w-full h-full" />
         <div className="absolute inset-0 bg-white bg-opacity-75 flex items-center justify-center z-[1000]">
           <div className="text-center">
             <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mb-4"></div>
-            <p className="text-gray-600 font-medium">
-              {isLoading ? "Cargando colegios..." : "Geocodificando ubicaciones..."}
-            </p>
-            {isGeocoding && (
-              <p className="text-sm text-gray-500 mt-2">
-                Progreso: {geocodingProgress}%
-              </p>
-            )}
+            <p className="text-gray-600 font-medium">Cargando colegios...</p>
           </div>
         </div>
       </div>
