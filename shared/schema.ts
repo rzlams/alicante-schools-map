@@ -1,4 +1,4 @@
-import { pgTable, text, serial, boolean } from "drizzle-orm/pg-core";
+import { pgTable, text, serial, boolean, real } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -11,6 +11,8 @@ export const schools = pgTable("schools", {
   isVisited: boolean("is_visited").notNull().default(false),
   hasQuota: boolean("has_quota").notNull().default(false),
   comments: text("comments").notNull().default(""),
+  lat: real("lat"),
+  lng: real("lng"),
 });
 
 export const insertSchoolSchema = createInsertSchema(schools).omit({

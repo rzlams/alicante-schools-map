@@ -36,6 +36,8 @@ export class MemStorage implements IStorage {
         isVisited: false,
         hasQuota: false,
         comments: "",
+        lat: null,
+        lng: null,
       };
       this.schools.set(school.id, school);
     });

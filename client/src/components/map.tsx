@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
-import type { School, SchoolWithCoords } from "@/types/school";
+import type { School } from "@/types/school";
 import { geocodeAddress, delay } from "@/lib/geocoding";
 
 // Import Leaflet
@@ -17,6 +17,8 @@ export function Map({ onSchoolsLoad }: MapProps) {
   const markersRef = useRef<L.Marker[]>([]);
   const [isGeocoding, setIsGeocoding] = useState(false);
   const [geocodingProgress, setGeocodingProgress] = useState({ current: 0, total: 0 });
+  const [geocodedSchools, setGeocodedSchools] = useState<Array<{school: School, lat: number, lng: number}>>([]);
+
 
   const { data: schools, isLoading } = useQuery<School[]>({
     queryKey: ["/api/schools"],
@@ -130,15 +132,23 @@ export function Map({ onSchoolsLoad }: MapProps) {
     });
     markersRef.current = [];
 
+    const geocodedResults: Array<{school: School, lat: number, lng: number}> = [];
+
     for (let i = 0; i < schools.length; i++) {
       const school = schools[i];
       
-      // Small delay to avoid rate limiting
-      if (i > 0) {
-        await delay(100);
+      let coords = null;
+      
+      // Use existing coordinates if available
+      if (school.lat && school.lng) {
+        coords = { lat: school.lat, lng: school.lng };
+      } else {
+        // Small delay to avoid rate limiting
+        if (i > 0) {
+          await delay(200);
+        }
+        coords = await geocodeAddress(school.address);
       }
-
-      const coords = await geocodeAddress(school.address);
       
       if (coords && mapInstanceRef.current) {
         const marker = L.marker([coords.lat, coords.lng], {
@@ -151,12 +161,35 @@ export function Map({ onSchoolsLoad }: MapProps) {
         });
 
         markersRef.current.push(marker);
+        
+        // Store the geocoded result
+        geocodedResults.push({
+          school,
+          lat: coords.lat,
+          lng: coords.lng
+        });
       }
 
       setGeocodingProgress({ current: i + 1, total: schools.length });
     }
 
+    setGeocodedSchools(geocodedResults);
     setIsGeocoding(false);
+
+    // Print the complete JSON data for all schools with coordinates
+    console.log("=== COMPLETE SCHOOLS DATA WITH COORDINATES ===");
+    console.log(JSON.stringify(geocodedResults.map(result => ({
+      name: result.school.name,
+      address: result.school.address,
+      phone: result.school.phone,
+      email: result.school.email,
+      isVisited: false,
+      hasQuota: false,
+      comments: "",
+      lat: result.lat,
+      lng: result.lng
+    })), null, 2));
+    console.log("=== END SCHOOLS DATA ===");
   };
 
   if (isLoading || isGeocoding) {

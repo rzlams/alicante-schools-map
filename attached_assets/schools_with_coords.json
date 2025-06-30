@@ -1,0 +1,211 @@
+[
+  {
+    "name": "AUSÍAS MARCH",
+    "address": "Calle Ceres, 24, C.P. 03009",
+    "phone": "965 91 90 30",
+    "email": "03001544@edu.gva.es",
+    "isVisited": false,
+    "hasQuota": false,
+    "comments": "",
+    "lat": 38.0889209,
+    "lng": -0.7066778
+  },
+  {
+    "name": "AZORÍN",
+    "address": "Calle Biólogo Konrad Lorenz, 5, C.P. 03015",
+    "phone": "965 93 25 10",
+    "email": "03009683@edu.gva.es",
+    "isVisited": false,
+    "hasQuota": false,
+    "comments": "",
+    "lat": 38.3638571,
+    "lng": -0.4709037
+  },
+  {
+    "name": "BENALÚA",
+    "address": "Calle Doctor Just, 70, C.P. 03007",
+    "phone": "965 91 90 40",
+    "email": "03000734@edu.gva.es",
+    "isVisited": false,
+    "hasQuota": false,
+    "comments": "",
+    "lat": 38.3413575,
+    "lng": -0.497246
+  },
+  {
+    "name": "CAMPOAMOR",
+    "address": "Paseo de Campoamor, 1, C.P. 03010",
+    "phone": "965 91 97 30",
+    "email": "03001601@edu.gva.es",
+    "isVisited": false,
+    "hasQuota": false,
+    "comments": "",
+    "lat": 38.3537544,
+    "lng": -0.4863349
+  },
+  {
+    "name": "CARLOS ARNICHES",
+    "address": "Calle Alonso Cano, 19, C.P. 03014",
+    "phone": "965 91 97 40",
+    "email": "03001571@edu.gva.es",
+    "isVisited": false,
+    "hasQuota": false,
+    "comments": "",
+    "lat": 38.3724104,
+    "lng": -0.483092
+  },
+  {
+    "name": "COSTA BLANCA",
+    "address": "Avda. de las Naciones, 9, C.P. 03450",
+    "phone": "965 91 97 50",
+    "email": "03015661@edu.gva.es",
+    "isVisited": false,
+    "hasQuota": false,
+    "comments": "",
+    "lat": 38.3636909,
+    "lng": -0.4195397
+  },
+  {
+    "name": "EL FARO",
+    "address": "Calle Sargo, 4, C.P. 03540",
+    "phone": "965 93 73 90",
+    "email": "03015351@edu.gva.es",
+    "isVisited": false,
+    "hasQuota": false,
+    "comments": "",
+    "lat": 38.35977,
+    "lng": -0.4163889
+  },
+  {
+    "name": "EL PALMERAL",
+    "address": "Calle Portet de Moraira, 2, C.P. 03008",
+    "phone": "965 91 97 60",
+    "email": "03011161@edu.gva.es",
+    "isVisited": false,
+    "hasQuota": false,
+    "comments": "",
+    "lat": 38.3312052,
+    "lng": -0.5123466
+  },
+  {
+    "name": "EL TOSSAL",
+    "address": "Calle Juanito Santero, 3, C.P. 03005",
+    "phone": "965 91 97 70",
+    "email": "03009749@edu.gva.es",
+    "isVisited": false,
+    "hasQuota": false,
+    "comments": "",
+    "lat": 38.352936,
+    "lng": -0.4963625
+  },
+  {
+    "name": "EL TOSSALET",
+    "address": "Calle Cronista Vicente Martínez Morella, s/n, C.P. 03014",
+    "phone": "965 93 62 00",
+    "email": "03009968@edu.gva.es",
+    "isVisited": false,
+    "hasQuota": false,
+    "comments": "",
+    "lat": 38.3715969,
+    "lng": -0.4784962
+  },
+  {
+    "name": "EMILIO VARELA",
+    "address": "Calle Del Clot, 10, C.P. 03011",
+    "phone": "965 91 97 80",
+    "email": "03010193@edu.gva.es",
+    "isVisited": false,
+    "hasQuota": false,
+    "comments": "",
+    "lat": 38.6037757,
+    "lng": -0.042608
+  },
+  {
+    "name": "ENRIC VALOR",
+    "address": "Calle San Lorenzo, 33, C.P. 03007",
+    "phone": "965 91 97 90",
+    "email": "03011987@edu.gva.es",
+    "isVisited": false,
+    "hasQuota": false,
+    "comments": "",
+    "lat": 38.3416171,
+    "lng": -0.5129713
+  },
+  {
+    "name": "EUSEBIO SEMPERE",
+    "address": "Calle Isidoro Sevilla, 2, C.P. 03009",
+    "phone": "965 93 62 10",
+    "email": "03000692@edu.gva.es",
+    "isVisited": false,
+    "hasQuota": false,
+    "comments": "",
+    "lat": 38.3760798,
+    "lng": -0.5047347
+  },
+  {
+    "name": "FLORIDA",
+    "address": "Calle Pianista Gonzalo Soriano, 3, C.P. 03007",
+    "phone": "965 93 62 20",
+    "email": "03001581@edu.gva.es",
+    "isVisited": false,
+    "hasQuota": false,
+    "comments": "",
+    "lat": 38.3402818,
+    "lng": -0.5082404
+  },
+  {
+    "name": "GABRIEL MIRÓ",
+    "address": "Calle Profesor David Noguera, 2, C.P. 03006",
+    "phone": "965 93 62 30",
+    "email": "03010201@edu.gva.es",
+    "isVisited": false,
+    "hasQuota": false,
+    "comments": "",
+    "lat": 38.3462423,
+    "lng": -0.5065716
+  },
+  {
+    "name": "GASTON CASTELLÓ",
+    "address": "Calle Claudio Coello, 2, C.P. 03010",
+    "phone": "965 93 62 40",
+    "email": "03011859@edu.gva.es",
+    "isVisited": false,
+    "hasQuota": false,
+    "comments": "",
+    "lat": 38.3651573,
+    "lng": -0.4924835
+  },
+  {
+    "name": "GLORIA FUERTES",
+    "address": "Calle Cuarzo, 19, C.P. 03014",
+    "phone": "965 93 62 50",
+    "email": "03015191@edu.gva.es",
+    "isVisited": false,
+    "hasQuota": false,
+    "comments": "",
+    "lat": 38.3769583,
+    "lng": -0.4873464
+  },
+  {
+    "name": "ISLA DE TABARCA",
+    "address": "Calle Benifallín, 4",
+    "phone": "965 93 62 60",
+    "email": "03016183@edu.gva.es",
+    "isVisited": false,
+    "hasQuota": false,
+    "comments": "",
+    "lat": 38.3452,
+    "lng": -0.4815
+  },
+  {
+    "name": "JOAQUÍN SOROLLA",
+    "address": "Calle Albacete, s/n, C.P. 03006",
+    "phone": "965 93 62 70",
+    "email": "03001568@edu.gva.es",
+    "isVisited": false,
+    "hasQuota": false,
+    "comments": "",
+    "lat": 38.3513049,
+    "lng": -0.4981054
+  }
+]

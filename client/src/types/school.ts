@@ -7,6 +7,8 @@ export interface School {
   isVisited: boolean;
   hasQuota: boolean;
   comments: string;
+  lat?: number;
+  lng?: number;
 }
 
 export interface SchoolWithCoords extends School {

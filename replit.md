@@ -97,7 +97,8 @@ This is a full-stack React application that displays schools in Alicante, Spain 
 - Tailwind CSS compilation for styling
 
 ## Changelog
-- June 30, 2025. Initial setup
+- June 30, 2025. Initial setup - Created school mapping application
+- June 30, 2025. Performance optimization - Currently geocoding all school addresses to collect coordinates for improved loading performance
 
 ## User Preferences
 Preferred communication style: Simple, everyday language.
