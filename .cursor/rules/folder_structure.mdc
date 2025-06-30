@@ -1,0 +1,152 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Schools Map Application
+
+## Overview
+
+This is a full-stack React application that displays schools in Alicante, Spain on an interactive map. Users can view schools, track their visit status, manage quota information, and add comments. The application uses a modern tech stack with React for the frontend, Express for the backend, and Drizzle ORM for database operations.
+
+## System Architecture
+
+### Frontend Architecture
+
+- **Framework**: React with TypeScript
+- **Routing**: Wouter for client-side routing
+- **State Management**: TanStack Query (React Query) for server state management
+- **UI Components**: Radix UI primitives with custom shadcn/ui components
+- **Styling**: Tailwind CSS with CSS variables for theming
+- **Map Integration**: Leaflet for interactive maps with OpenStreetMap tiles
+- **Form Management**: React Hook Form with Zod validation
+- **Build Tool**: Vite with React plugin
+
+### Backend Architecture
+
+- **Framework**: Express.js with TypeScript
+- **Database**: PostgreSQL with Drizzle ORM
+- **Database Provider**: Neon Database (serverless PostgreSQL)
+- **API Pattern**: RESTful API endpoints
+- **Storage**: In-memory storage with fallback to database
+- **Session Management**: PostgreSQL-based sessions with connect-pg-simple
+
+### Development Environment
+
+- **Bundler**: Vite for development and production builds
+- **TypeScript**: Strict type checking across the entire codebase
+- **Hot Module Replacement**: Vite HMR for fast development
+- **Error Handling**: Runtime error overlay for development
+
+## Key Components
+
+### Database Schema
+
+- **Schools Table**: Stores school information including name, address, contact details, visit status, quota availability, and comments
+- **Users Table**: User authentication and management (prepared for future use)
+
+### API Endpoints
+
+- `GET /api/schools`: Retrieve all schools
+- `PATCH /api/schools/:id`: Update school information (visit status, quota, comments)
+
+### Frontend Components
+
+- **Map Component**: Interactive Leaflet map showing school locations
+- **Legend Component**: Visual guide for school status indicators
+- **Stats Panel**: Real-time statistics display
+- **UI Components**: Comprehensive set of reusable components from shadcn/ui
+
+### External Services
+
+- **Geocoding**: OpenStreetMap Nominatim API for address-to-coordinates conversion
+- **Map Tiles**: OpenStreetMap for base map visualization
+
+## Data Flow
+
+1. **Initial Load**: Application fetches schools data from API endpoint
+2. **Geocoding**: School addresses are converted to coordinates using Nominatim API
+3. **Map Rendering**: Schools are displayed as markers on the Leaflet map
+4. **User Interactions**: Status updates are sent to backend via PATCH requests
+5. **State Updates**: TanStack Query manages cache invalidation and UI updates
+6. **Real-time Stats**: Statistics panel updates automatically based on data changes
+
+## External Dependencies
+
+### Core Libraries
+
+- React ecosystem (React, React DOM, React Query)
+- Express.js and Node.js runtime
+- Drizzle ORM with PostgreSQL driver
+- Leaflet for mapping functionality
+- Radix UI for accessible components
+- Tailwind CSS for styling
+
+### Development Tools
+
+- Vite for build tooling
+- TypeScript for type safety
+- ESBuild for production bundling
+- Replit-specific plugins for development environment
+
+### API Services
+
+- OpenStreetMap Nominatim for geocoding
+- Neon Database for PostgreSQL hosting
+
+## Deployment Strategy
+
+### Development
+
+- Uses Vite development server with HMR
+- In-memory storage for rapid prototyping
+- Environment-specific configuration via NODE_ENV
+
+### Production Build
+
+- Vite builds optimized client bundle
+- ESBuild creates server bundle
+- Static assets served by Express
+- Database migrations via Drizzle Kit
+
+### Environment Configuration
+
+- Database URL required for PostgreSQL connection
+- Drizzle configuration for schema management
+- Tailwind CSS compilation for styling
+
+## Folder Structure
+Root Directory: Contains global configuration files for the project.
+
+package.json: Manages project dependencies, scripts (dev, build, start), and metadata.
+drizzle.config.ts: Configures the Drizzle ORM, pointing to the database schema and migrations output directory.
+.gitignore: Lists files and directories ignored by version control, such as node_modules and the dist build output.
+replit.md: A detailed markdown document describing the project's architecture, data flow, and dependencies.
+client/: Houses the entire frontend React application.
+
+index.html: The main entry point and HTML shell for the single-page application.
+src/: The primary source code directory for the client.
+main.tsx: (Inferred from index.html) The main TypeScript file that bootstraps the React application.
+components/: Contains reusable React components.
+map.tsx: The core component for rendering the interactive map using Leaflet. It handles fetching school data, geocoding addresses, and displaying markers.
+ui/: General-purpose UI components, many of which are based on shadcn/ui and Radix UI primitives (e.g., sidebar.tsx, toast.tsx).
+lib/: Contains utility functions and helper modules.
+geocoding.ts: A utility for converting school addresses to geographic coordinates using the Nominatim API.
+utils.ts: (Inferred) Common utility functions, such as for merging CSS classes (cn).
+hooks/: Custom React hooks for managing component logic and state.
+use-toast.ts: A custom hook for creating and managing toast notifications.
+use-mobile.ts: (Inferred from sidebar.tsx) A hook to detect if the application is being viewed on a mobile device.
+pages/: Components that represent distinct pages or views within the application.
+not-found.tsx: The component rendered for 404 Not Found routes.
+types/: (Inferred) TypeScript type definitions used across the client application (e.g., school.ts).
+server/: Contains the backend Express.js application.
+
+index.ts: The entry point for the server. It initializes Express, sets up middleware, registers API routes, and serves the client application.
+vite.ts: A helper module to integrate the Vite development server as middleware in development mode and to serve the static build of the client in production.
+routes/: (Inferred from server/index.ts) Directory containing the API route handlers.
+shared/: (Inferred from drizzle.config.ts)
+
+schema.ts: Defines the database schema using Drizzle ORM. This file is used by both the server for database operations and potentially by the client for type-safe data handling.
+dist/: (Inferred from package.json and .gitignore) The build output directory. The build script compiles the server and client code into this folder for production deployment.
+
+migrations/: (Inferred from drizzle.config.ts) Stores the SQL migration files generated by Drizzle Kit to manage database schema changes over time.
