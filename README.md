@@ -2,6 +2,32 @@
 
 An interactive map displaying schools in Alicante, Spain. This application allows users to view school locations, track visit status, quota availability, and add comments for each school.
 
+## Deployment
+
+✅ Correct base path: /alicante-schools-map in vite.config.ts
+✅ Homepage field: Properly set in package.json
+✅ Build assets: Now have correct paths (/alicante-schools-map/assets/)
+✅ Deployment: Successfully pushed to gh-pages branch
+
+1. Go to Repository Settings
+   Open your repository: https://github.com/rzlams/alicante-schools-map
+   Click the "Settings" tab
+   Scroll down to "Pages" in the left sidebar
+2. Change the Source Branch
+   Under "Source", you'll see "Deploy from a branch"
+   Change the branch from "main" to "gh-pages"
+   Keep the folder as "/ (root)"
+   Click "Save"
+3. Push all the changes to the github repository
+4. Execute the command `npm run deploy`
+5. Wait for Deployment
+   GitHub will show: "Your site is being built from the gh-pages branch"
+   Wait 1-2 minutes for the deployment to complete
+   You'll see a green checkmark when it's ready
+6. Access Your Site
+   Your Alicante Schools Map will be available at:
+   https://rzlams.github.io/alicante-schools-map/
+
 ## Features
 
 - 🗺️ Interactive map with 117+ schools in Alicante
