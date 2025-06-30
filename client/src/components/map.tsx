@@ -1,6 +1,7 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import type { School } from "@/types/school";
+import { geocodeAddress, delay } from "@/lib/geocoding";
 
 // Import Leaflet
 import L from "leaflet";
@@ -14,9 +15,12 @@ export function Map({ onSchoolsLoad }: MapProps) {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<L.Map | null>(null);
   const markersRef = useRef<L.Marker[]>([]);
+  const [isGeocoding, setIsGeocoding] = useState(false);
+  const [geocodingProgress, setGeocodingProgress] = useState(0);
+  const [allSchoolsGeocoded, setAllSchoolsGeocoded] = useState<School[]>([]);
 
 
-  const { data: schools, isLoading } = useQuery<School[]>({
+  const { data, isLoading } = useQuery<School[]>({
     queryKey: ["/api/schools"],
   });
 
@@ -41,12 +45,99 @@ export function Map({ onSchoolsLoad }: MapProps) {
     };
   }, []);
 
-  useEffect(() => {
-    if (schools) {
-      onSchoolsLoad(schools);
-      loadSchoolMarkers(schools);
+  // Add a comprehensive geocoding function
+  const geocodeAllSchools = async (schools: School[]) => {
+    setIsGeocoding(true);
+    setGeocodingProgress(0);
+    
+    const geocodedSchools: School[] = [];
+    
+    for (let i = 0; i < schools.length; i++) {
+      const school = schools[i];
+      
+      if (school.lat && school.lng) {
+        // School already has coordinates
+        geocodedSchools.push(school);
+      } else {
+        // Geocode the school address
+        console.log(`Geocoding ${i + 1}/${schools.length}: ${school.name}`);
+        
+        try {
+          const coords = await geocodeAddress(school.address);
+          if (coords) {
+            geocodedSchools.push({
+              ...school,
+              lat: coords.lat,
+              lng: coords.lng
+            });
+            console.log(`✓ ${school.name}: ${coords.lat}, ${coords.lng}`);
+          } else {
+            // Place at Alicante center if geocoding fails
+            const baselat = 38.3452;
+            const baseLng = -0.4815;
+            const offsetRange = 0.01;
+            
+            geocodedSchools.push({
+              ...school,
+              lat: baselat + (Math.random() - 0.5) * offsetRange,
+              lng: baseLng + (Math.random() - 0.5) * offsetRange
+            });
+            console.log(`⚠ ${school.name}: No geocoding result, placed at center`);
+          }
+        } catch (error) {
+          console.error(`Error geocoding ${school.name}:`, error);
+          // Place at center if error
+          const baselat = 38.3452;
+          const baseLng = -0.4815;
+          const offsetRange = 0.01;
+          
+          geocodedSchools.push({
+            ...school,
+            lat: baselat + (Math.random() - 0.5) * offsetRange,
+            lng: baseLng + (Math.random() - 0.5) * offsetRange
+          });
+        }
+        
+        // Small delay to avoid overwhelming the API
+        if (i < schools.length - 1) {
+          await delay(250);
+        }
+      }
+      
+      setGeocodingProgress(Math.round((i + 1) / schools.length * 100));
     }
-  }, [schools, onSchoolsLoad]);
+    
+    console.log("=== COMPLETE GEOCODED DATA ===");
+    console.log(JSON.stringify(geocodedSchools, null, 2));
+    console.log("=== END GEOCODED DATA ===");
+    
+    setAllSchoolsGeocoded(geocodedSchools);
+    setIsGeocoding(false);
+    
+    return geocodedSchools;
+  };
+
+  useEffect(() => {
+    if (data) {
+      onSchoolsLoad(data);
+      
+      // Check if we need to geocode
+      const needsGeocoding = data.some(school => !school.lat || !school.lng);
+      
+      if (needsGeocoding && !isGeocoding && allSchoolsGeocoded.length === 0) {
+        // Start geocoding process
+        geocodeAllSchools(data).then(geocodedData => {
+          loadSchoolMarkers(geocodedData);
+        });
+      } else if (allSchoolsGeocoded.length > 0) {
+        // Use already geocoded data
+        loadSchoolMarkers(allSchoolsGeocoded);
+      } else {
+        // Data already has coordinates
+        loadSchoolMarkers(data);
+      }
+    }
+  }, [data, onSchoolsLoad, allSchoolsGeocoded, isGeocoding]);
 
   const createCustomIcon = (school: School) => {
     let color = '#374151'; // Default black
@@ -116,7 +207,7 @@ export function Map({ onSchoolsLoad }: MapProps) {
     `;
   };
 
-  const loadSchoolMarkers = (schools: School[]) => {
+  const loadSchoolMarkers = (schoolsData: School[]) => {
     if (!mapInstanceRef.current) return;
 
     // Clear existing markers
@@ -125,11 +216,11 @@ export function Map({ onSchoolsLoad }: MapProps) {
     });
     markersRef.current = [];
 
-    console.log(`Loading ${schools.length} schools on map`);
+    console.log(`Loading ${schoolsData.length} schools on map`);
 
     // Add markers for schools - use coordinates if available, otherwise place in Alicante center with offset
     let markersAdded = 0;
-    schools.forEach((school, index) => {
+    schoolsData.forEach((school, index) => {
       if (mapInstanceRef.current) {
         let lat, lng;
         
@@ -161,17 +252,24 @@ export function Map({ onSchoolsLoad }: MapProps) {
       }
     });
 
-    console.log(`Added ${markersAdded} markers out of ${schools.length} schools`);
+    console.log(`Added ${markersAdded} markers out of ${schoolsData.length} schools`);
   };
 
-  if (isLoading) {
+  if (isLoading || isGeocoding) {
     return (
       <div className="relative w-full h-[calc(100vh-4rem)]">
         <div ref={mapRef} className="w-full h-full" />
         <div className="absolute inset-0 bg-white bg-opacity-75 flex items-center justify-center z-[1000]">
           <div className="text-center">
             <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mb-4"></div>
-            <p className="text-gray-600 font-medium">Cargando colegios...</p>
+            <p className="text-gray-600 font-medium">
+              {isLoading ? "Cargando colegios..." : "Geocodificando ubicaciones..."}
+            </p>
+            {isGeocoding && (
+              <p className="text-sm text-gray-500 mt-2">
+                Progreso: {geocodingProgress}%
+              </p>
+            )}
           </div>
         </div>
       </div>
