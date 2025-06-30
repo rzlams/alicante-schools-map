@@ -1,11 +1,14 @@
 {
   "name": "alicante-schools-map",
+  "homepage": "https://rzlams.github.io/alicante-schools-map",
   "version": "1.0.0",
   "type": "module",
   "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "preview": "vite preview",
     "check": "tsc"
   },
@@ -44,6 +47,7 @@
     "date-fns": "^3.6.0",
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "^11.13.1",
+    "gh-pages": "^6.3.0",
     "input-otp": "^1.4.2",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.453.0",
