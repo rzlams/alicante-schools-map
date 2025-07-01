@@ -1,6 +1,6 @@
-# Alicante Schools Map
+# Alicante Schools and Rental Properties Map
 
-An interactive map displaying schools in Alicante, Spain. This application allows users to view school locations, track visit status, quota availability, and add comments for each school.
+An interactive map displaying schools and rental houses in Alicante, Spain. This application allows users to view both educational institutions and rental properties, track visit status, manage quota/availability information, and add comments for each location.
 
 ## Deployment
 
@@ -25,19 +25,40 @@ An interactive map displaying schools in Alicante, Spain. This application allow
    Wait 1-2 minutes for the deployment to complete
    You'll see a green checkmark when it's ready
 6. Access Your Site
-   Your Alicante Schools Map will be available at:
+   Your Alicante Schools and Houses Map will be available at:
    https://rzlams.github.io/alicante-schools-map/
 
 ## Features
 
+### Schools Management
+
 - 🗺️ Interactive map with 117+ schools in Alicante
-- 🎯 Color-coded markers:
+- 🎯 Color-coded circular markers:
   - **Black**: Unvisited schools
   - **Red**: Visited schools without quota
   - **Green**: Visited schools with quota
 - 🖱️ Click markers to view school information
 - 📍 School details include name, address, phone, email, and comments
+- 📊 Statistics panel with filters: Total, Visitados, Sin cupo
+
+### Rental Houses Management
+
+- 🏠 Interactive display of rental properties
+- 🔺 Triangular markers for houses:
+  - **Black**: Default state
+  - **Green**: Visited houses
+  - **Red**: Not available houses
+  - **Orange border**: High priority properties
+- 💰 Property details include address, price, warranty months, insurance requirements
+- 👥 Agent information in collapsible sections (name, agency, address, phone, email, web)
+- 📊 Independent statistics panel with filters: Total, Visitados, No disponible
+
+### General Features
+
 - 📱 Responsive design for mobile and desktop
+- 🎛️ Independent filtering for schools and houses
+- 🗂️ Layered display (houses appear above schools)
+- 🖱️ Toggle popup functionality for all markers
 
 ## Live Demo
 
@@ -48,6 +69,7 @@ Visit the live application: [https://rzlams.github.io/alicante_schools_map/](htt
 - **Frontend**: React with TypeScript
 - **Map**: Leaflet with OpenStreetMap tiles
 - **Styling**: Tailwind CSS
+- **UI Components**: Radix UI primitives with custom shadcn/ui components
 - **Build Tool**: Vite
 - **Deployment**: GitHub Pages
 
@@ -89,14 +111,52 @@ npm run build
 
 The built files will be in the `dist` directory.
 
-## Data
+## Data Structure
 
-The school data includes geocoded coordinates for accurate positioning on the map. Each school entry contains:
+### Schools Data (`client/src/data/schools.json`)
 
-- Name and address
-- Contact information (phone and email)
-- Visit status and quota availability
-- Space for comments
+The school data includes geocoded coordinates for accurate positioning. Each school entry contains:
+
+- Basic information: name, address, contact details (phone, email)
+- Status tracking: visit status (`isVisited`), quota availability (`hasQuota`)
+- Additional notes: comments field for observations
+
+### Houses Data (`client/src/data/houses.json`)
+
+The rental properties data structure includes:
+
+**Houses Array:**
+
+- Basic info: id, address, coordinates (lat/lng)
+- Rental details: price, warranty months, insurance requirements
+- Status tracking: visit status (`isVisited`), availability (`isNotAvailable`)
+- Priority levels: HIGH (orange border) or LOW
+- Agent assignment: `agentId` for contact information
+- Comments: additional notes
+
+**Agents Array:**
+
+- Contact information: name, agency, address, phone, email, web
+- Linked to houses via `agentId` reference
+
+## File Structure
+
+```
+client/src/
+├── components/
+│   ├── map.tsx                    # Main map component (handles both schools and houses)
+│   ├── stats-panel.tsx            # Schools statistics and filters
+│   ├── house-stats-panel.tsx      # Houses statistics and filters
+│   └── ui/                        # Reusable UI components
+├── data/
+│   ├── schools.json               # Schools dataset
+│   └── houses.json                # Houses and agents dataset
+├── types/
+│   ├── school.ts                  # School TypeScript types
+│   └── house.ts                   # House and Agent TypeScript types
+└── pages/
+    └── home.tsx                   # Main page component
+```
 
 ## License
 

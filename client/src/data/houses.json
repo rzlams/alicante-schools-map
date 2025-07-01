@@ -1,0 +1,38 @@
+{
+  "houses": [
+    {
+      "id": 1,
+      "address": "Calle Alonso Cano, Carolinas Altas",
+      "lat": 38.368152,
+      "lng": -0.480752,
+      "price": 750,
+      "warrantyMonths": 1,
+      "requireInsurance": false,
+      "comments": "",
+      "agentId": 1,
+      "isVisited": false,
+      "isNotAvailable": false,
+      "priority": "HIGH"
+    }
+  ],
+  "agents": [
+    {
+      "id": 1,
+      "name": "",
+      "agency": "Inmobilix Broker",
+      "address": "",
+      "phone": "+34 965 02 48 36",
+      "email": "",
+      "web": ""
+    },
+    {
+      "id": 2,
+      "name": "Candela Ruau",
+      "agency": "Red Piso",
+      "address": "Avenida Condes de Soto Ameno 43, Alicante",
+      "phone": "+34 667 24 95 91",
+      "email": "alicante.sanblas@redpiso.es",
+      "web": "https://www.redpiso.es/"
+    }
+  ]
+}

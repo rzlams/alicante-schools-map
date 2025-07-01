@@ -1,54 +1,55 @@
 import { Card } from "@/components/ui/card";
-import type { FilterType } from "@/pages/home";
-import type { School } from "@/types/school";
+import type { House } from "@/types/house";
 
-interface StatsPanelProps {
-  schools: School[];
-  selectedFilter: FilterType;
-  onFilterChange: (filter: FilterType) => void;
-  allSchools: School[]; // Add prop for all schools to calculate global stats
+export type HouseFilterType = "all" | "visited" | "notAvailable";
+
+interface HouseStatsPanelProps {
+  houses: House[];
+  selectedFilter: HouseFilterType;
+  onFilterChange: (filter: HouseFilterType) => void;
+  allHouses: House[];
 }
 
-export function StatsPanel({
-  schools,
+export function HouseStatsPanel({
+  houses,
   selectedFilter,
   onFilterChange,
-  allSchools,
-}: StatsPanelProps) {
-  // Calculate global statistics from all schools for navigation purposes
-  const total = allSchools.length;
-  const visited = allSchools.filter(
-    (school) => school.isVisited && school.hasQuota
+  allHouses,
+}: HouseStatsPanelProps) {
+  // Calculate global statistics from all houses for navigation purposes
+  const total = allHouses.length;
+  const visited = allHouses.filter(
+    (house) => house.isVisited && !house.isNotAvailable
   ).length;
-  const withoutQuota = allSchools.filter(
-    (school) => school.isVisited && !school.hasQuota
-  ).length;
+  const notAvailable = allHouses.filter((house) => house.isNotAvailable).length;
 
   const filterSections = [
     {
-      id: "all" as FilterType,
+      id: "all" as HouseFilterType,
       value: total,
       label: "Total",
       color: "text-gray-900",
     },
     {
-      id: "visited" as FilterType,
+      id: "visited" as HouseFilterType,
       value: visited,
       label: "Visitados",
       color: "text-emerald-600",
     },
     {
-      id: "withoutQuota" as FilterType,
-      value: withoutQuota,
-      label: "Sin cupo",
+      id: "notAvailable" as HouseFilterType,
+      value: notAvailable,
+      label: "No disponible",
       color: "text-red-600",
     },
   ];
 
   return (
-    <Card className="bottom-40 left-4 z-[1000] absolute bg-white shadow-lg p-4 border border-gray-200 rounded-lg">
+    <Card className="bottom-4 left-4 z-[1000] absolute bg-white shadow-lg p-4 border border-gray-200 rounded-lg">
       <div className="mb-2">
-        <h3 className="font-semibold text-gray-700 text-sm">Colegios</h3>
+        <h3 className="font-semibold text-gray-700 text-sm">
+          Casas en Alquiler
+        </h3>
       </div>
       <div className="gap-4 grid grid-cols-3 text-center">
         {filterSections.map((section) => (

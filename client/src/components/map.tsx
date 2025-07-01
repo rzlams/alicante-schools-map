@@ -1,4 +1,8 @@
+import type { HouseFilterType } from "@/components/house-stats-panel";
+import housesData from "@/data/houses.json";
 import schoolsData from "@/data/schools.json";
+import type { FilterType } from "@/pages/home";
+import type { Agent, House, HousesData } from "@/types/house";
 import type { School } from "@/types/school";
 import { useEffect, useRef, useState } from "react";
 
@@ -20,23 +24,64 @@ L.Icon.Default.mergeOptions({
 
 interface MapProps {
   onSchoolsLoad: (schools: School[]) => void;
+  onHousesLoad: (houses: House[]) => void;
+  selectedFilter: FilterType;
+  selectedHouseFilter: HouseFilterType;
 }
 
-export function Map({ onSchoolsLoad }: MapProps) {
+export function Map({
+  onSchoolsLoad,
+  onHousesLoad,
+  selectedFilter,
+  selectedHouseFilter,
+}: MapProps) {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<L.Map | null>(null);
-  const markersRef = useRef<L.Marker[]>([]);
+  const schoolMarkersRef = useRef<L.Marker[]>([]);
+  const houseMarkersRef = useRef<L.Marker[]>([]);
   const currentOpenPopup = useRef<L.Marker | null>(null);
   const [schools] = useState<School[]>(schoolsData as School[]);
+  const [housesDataState] = useState<HousesData>(housesData as HousesData);
 
-  // Debug schools data immediately
+  // Function to filter schools based on selected filter
+  const getFilteredSchools = (
+    schools: School[],
+    filter: FilterType
+  ): School[] => {
+    switch (filter) {
+      case "visited":
+        return schools.filter((school) => school.isVisited && school.hasQuota);
+      case "withoutQuota":
+        return schools.filter((school) => school.isVisited && !school.hasQuota);
+      case "all":
+      default:
+        return schools;
+    }
+  };
+
+  // Function to filter houses based on selected filter
+  const getFilteredHouses = (
+    houses: House[],
+    filter: HouseFilterType
+  ): House[] => {
+    switch (filter) {
+      case "visited":
+        return houses.filter(
+          (house) => house.isVisited && !house.isNotAvailable
+        );
+      case "notAvailable":
+        return houses.filter((house) => house.isNotAvailable);
+      case "all":
+      default:
+        return houses;
+    }
+  };
+
+  // Debug data immediately
   console.log("Map component initialized");
   console.log("Schools data loaded:", schoolsData.length, "schools");
-  console.log("First school from JSON:", schoolsData[0]);
-  console.log(
-    "Schools with coordinates:",
-    schoolsData.filter((s) => s.lat && s.lng).length
-  );
+  console.log("Houses data loaded:", housesDataState.houses.length, "houses");
+  console.log("Agents data loaded:", housesDataState.agents.length, "agents");
 
   useEffect(() => {
     if (!mapRef.current) return;
@@ -95,29 +140,38 @@ export function Map({ onSchoolsLoad }: MapProps) {
     };
   }, []);
 
-  // Load schools data when map and data are ready
+  // Load schools and houses data when map and data are ready
   useEffect(() => {
-    console.log(
-      "Schools effect called - schools:",
-      schools?.length,
-      "map:",
-      !!mapInstanceRef.current
-    );
-
-    if (!schools || schools.length === 0) {
-      console.log("No schools data available");
+    if (
+      !schools ||
+      schools.length === 0 ||
+      !housesDataState.houses ||
+      housesDataState.houses.length === 0
+    ) {
+      console.log("No data available");
       return;
     }
 
-    console.log("Loading schools with data:", schools.length);
-    console.log("Schools data preview:", schools.slice(0, 2));
+    console.log(
+      "Loading data - schools:",
+      schools.length,
+      "houses:",
+      housesDataState.houses.length
+    );
     onSchoolsLoad(schools);
+    onHousesLoad(housesDataState.houses);
 
     // Wait for map to be available, then load markers
     const checkMapAndLoad = () => {
       if (mapInstanceRef.current) {
         console.log("Map is ready, loading markers...");
-        loadSchoolMarkers(schools);
+        const filteredSchools = getFilteredSchools(schools, selectedFilter);
+        const filteredHouses = getFilteredHouses(
+          housesDataState.houses,
+          selectedHouseFilter
+        );
+        loadSchoolMarkers(filteredSchools);
+        loadHouseMarkers(filteredHouses, housesDataState.agents);
       } else {
         console.log("Map not ready, waiting...");
         setTimeout(checkMapAndLoad, 100);
@@ -126,7 +180,14 @@ export function Map({ onSchoolsLoad }: MapProps) {
 
     // Start checking after a short delay
     setTimeout(checkMapAndLoad, 300);
-  }, [schools, onSchoolsLoad]);
+  }, [
+    schools,
+    housesDataState,
+    selectedFilter,
+    selectedHouseFilter,
+    onSchoolsLoad,
+    onHousesLoad,
+  ]);
 
   const createReferenceIcon = () => {
     return L.divIcon({
@@ -184,7 +245,58 @@ export function Map({ onSchoolsLoad }: MapProps) {
     });
   };
 
-  const createPopupContent = (school: School) => {
+  const createHouseIcon = (house: House) => {
+    let color = "#374151"; // Default black
+    let borderColor = "#ffffff"; // White border
+    let extraBorder = "";
+
+    // Color logic for houses
+    if (house.isNotAvailable) {
+      color = "#dc2626"; // Light gray - not available
+    } else if (house.isVisited) {
+      color = "#059669"; // Green - visited
+    } else {
+      color = "#374151"; // Black - default
+    }
+
+    // Add orange border for HIGH priority
+    if (house.priority === "HIGH") {
+      extraBorder = "box-shadow: 0 0 0 2px #f97316, 0 3px 6px rgba(0,0,0,0.3);";
+    } else {
+      extraBorder = "box-shadow: 0 3px 6px rgba(0,0,0,0.3);";
+    }
+
+    return L.divIcon({
+      className: "custom-house-marker",
+      iconSize: [20, 20],
+      iconAnchor: [10, 10],
+      popupAnchor: [0, -10],
+      html: `
+        <div style="
+          width: 0;
+          height: 0;
+          border-left: 10px solid transparent;
+          border-right: 10px solid transparent;
+          border-bottom: 17px solid ${color};
+          position: relative;
+          cursor: pointer;
+          transition: transform 0.2s ease;
+          ${extraBorder}
+        " onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+          <div style="
+            position: absolute;
+            top: 17px;
+            left: -10px;
+            width: 20px;
+            height: 3px;
+            background-color: ${borderColor};
+          "></div>
+        </div>
+      `,
+    });
+  };
+
+  const createSchoolPopupContent = (school: School) => {
     return `
       <div class="p-4 school-popup" style="min-width: 280px; max-width: 320px;">
         <div class="flex justify-between items-start mb-3">
@@ -199,7 +311,7 @@ export function Map({ onSchoolsLoad }: MapProps) {
             }
             ${
               school.hasQuota
-                ? '<div class="bg-red-500 rounded-full w-2 h-2" title="Con cuota"></div>'
+                ? '<div class="bg-red-500 rounded-full w-2 h-2" title="Con cupo"></div>'
                 : ""
             }
           </div>
@@ -257,24 +369,144 @@ export function Map({ onSchoolsLoad }: MapProps) {
     `;
   };
 
+  const createHousePopupContent = (house: House, agent: Agent | undefined) => {
+    const agentInfo = agent
+      ? `
+      <div class="mt-3 pt-3 border-gray-200 border-t">
+        <details class="group">
+          <summary class="flex justify-between items-center font-medium text-gray-700 group-open:text-gray-900 text-sm cursor-pointer list-none">
+            <span>Información del Agente</span>
+            <svg class="w-4 h-4 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </summary>
+          <div class="space-y-1 mt-2 text-gray-600 text-xs">
+            ${
+              agent.name
+                ? `<div><span class="font-medium">Contacto:</span> ${agent.name}</div>`
+                : ""
+            }
+            ${
+              agent.agency
+                ? `<div><span class="font-medium">Agencia:</span> ${agent.agency}</div>`
+                : ""
+            }
+            ${
+              agent.address
+                ? `<div><span class="font-medium">Dirección:</span> ${agent.address}</div>`
+                : ""
+            }
+            ${
+              agent.phone
+                ? `<div><span class="font-medium">Teléfono:</span> <a href="tel:${agent.phone}" class="text-blue-600 hover:text-blue-800">${agent.phone}</a></div>`
+                : ""
+            }
+            ${
+              agent.email
+                ? `<div><span class="font-medium">Email:</span> <a href="mailto:${agent.email}" class="text-blue-600 hover:text-blue-800">${agent.email}</a></div>`
+                : ""
+            }
+            ${
+              agent.web
+                ? `<div><span class="font-medium">Web:</span> <a href="${agent.web}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800">${agent.web}</a></div>`
+                : ""
+            }
+          </div>
+        </details>
+      </div>
+    `
+      : "";
+
+    return `
+      <div class="p-4 house-popup" style="min-width: 280px; max-width: 320px;">
+        <div class="flex justify-between items-start mb-3 pr-4">
+          <h3 class="pr-2 font-semibold text-gray-900 text-base leading-tight">Casa en Alquiler</h3>
+          <div class="flex flex-shrink-0 space-x-1">
+            ${
+              house.isVisited
+                ? '<div class="bg-emerald-500 rounded-full w-2 h-2" title="Visitado"></div>'
+                : ""
+            }
+            ${
+              house.isNotAvailable
+                ? '<div class="rounded-full w-2 h-2 text-red-600" title="No disponible"></div>'
+                : ""
+            }
+            ${
+              house.priority === "HIGH"
+                ? '<div class="bg-orange-500 rounded-full w-2 h-2" title="Prioridad alta"></div>'
+                : ""
+            }
+          </div>
+        </div>
+        
+        <div class="space-y-2 text-sm">
+          <div class="flex items-start space-x-2">
+            <svg class="flex-shrink-0 mt-0.5 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+            <span class="text-gray-600">${house.address}</span>
+          </div>
+          
+          <div class="flex items-center space-x-2">
+            <svg class="flex-shrink-0 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+            </svg>
+            <span class="text-gray-600"><span class="font-medium">${
+              house.price
+            }€/mes</span></span>
+          </div>
+          
+          <div class="flex items-center space-x-2">
+            <svg class="flex-shrink-0 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <span class="text-gray-600">Garantía: ${house.warrantyMonths} ${
+      house.warrantyMonths === 1 ? "mes" : "meses"
+    }</span>
+          </div>
+          
+          <div class="flex items-center space-x-2">
+            <svg class="flex-shrink-0 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+            </svg>
+            <span class="text-gray-600">Seguro: ${
+              house.requireInsurance ? "Obligatorio" : "No requerido"
+            }</span>
+          </div>
+          
+          ${
+            house.comments
+              ? `
+          <div class="flex items-start space-x-2 mt-3 pt-3 border-gray-200 border-t">
+            <svg class="flex-shrink-0 mt-0.5 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"/>
+            </svg>
+            <span class="text-gray-600 italic">${house.comments}</span>
+          </div>
+          `
+              : ""
+          }
+          
+          ${agentInfo}
+        </div>
+      </div>
+    `;
+  };
+
   const loadSchoolMarkers = (schoolsData: School[]) => {
     if (!mapInstanceRef.current) return;
 
-    // Clear existing markers and reset popup tracking
-    markersRef.current.forEach((marker) => {
+    // Clear existing school markers
+    schoolMarkersRef.current.forEach((marker) => {
       mapInstanceRef.current?.removeLayer(marker);
     });
-    markersRef.current = [];
-    currentOpenPopup.current = null;
+    schoolMarkersRef.current = [];
 
     console.log(`Loading ${schoolsData.length} schools on map`);
 
-    // Add markers for schools using their stored coordinates
-    let markersAdded = 0;
-    let schoolsWithoutCoords = 0;
-
-    schoolsData.forEach((school, index) => {
-      // Convert lat/lng to numbers if they're strings
+    schoolsData.forEach((school) => {
       const lat =
         typeof school.lat === "string" ? parseFloat(school.lat) : school.lat;
       const lng =
@@ -286,58 +518,100 @@ export function Map({ onSchoolsLoad }: MapProps) {
             icon: createCustomIcon(school),
           }).addTo(mapInstanceRef.current);
 
-          // Bind popup for both click and hover
           const popup = L.popup({
             maxWidth: 320,
             className: "school-popup-container",
-          }).setContent(createPopupContent(school));
+          }).setContent(createSchoolPopupContent(school));
 
           marker.bindPopup(popup);
 
-          // Add click event for toggle functionality
           marker.on("click", function (this: L.Marker) {
-            // If this marker's popup is currently open, close it
             if (currentOpenPopup.current === this) {
               this.closePopup();
               currentOpenPopup.current = null;
             } else {
-              // Close any currently open popup
               if (currentOpenPopup.current) {
                 currentOpenPopup.current.closePopup();
               }
-              // Open this marker's popup
               this.openPopup();
               currentOpenPopup.current = this;
             }
           });
 
-          // Track when popup is closed by other means (e.g., clicking the X button)
           marker.on("popupclose", function (this: L.Marker) {
             if (currentOpenPopup.current === this) {
               currentOpenPopup.current = null;
             }
           });
 
-          markersRef.current.push(marker);
-          markersAdded++;
+          schoolMarkersRef.current.push(marker);
         } catch (error) {
           console.error(
             `Error adding marker for school ${school.name}:`,
             error
           );
         }
-      } else {
-        schoolsWithoutCoords++;
-        console.log(
-          `School ${school.name} missing coordinates: lat=${lat}, lng=${lng}`
-        );
       }
     });
+  };
 
-    console.log(
-      `Added ${markersAdded} markers out of ${schoolsData.length} schools`
-    );
-    console.log(`Schools without valid coordinates: ${schoolsWithoutCoords}`);
+  const loadHouseMarkers = (housesData: House[], agents: Agent[]) => {
+    if (!mapInstanceRef.current) return;
+
+    // Clear existing house markers
+    houseMarkersRef.current.forEach((marker) => {
+      mapInstanceRef.current?.removeLayer(marker);
+    });
+    houseMarkersRef.current = [];
+
+    console.log(`Loading ${housesData.length} houses on map`);
+
+    housesData.forEach((house) => {
+      const lat =
+        typeof house.lat === "string" ? parseFloat(house.lat) : house.lat;
+      const lng =
+        typeof house.lng === "string" ? parseFloat(house.lng) : house.lng;
+
+      if (mapInstanceRef.current && lat && lng && !isNaN(lat) && !isNaN(lng)) {
+        try {
+          const marker = L.marker([lat, lng], {
+            icon: createHouseIcon(house),
+            zIndexOffset: 1000, // Houses on top of schools
+          }).addTo(mapInstanceRef.current);
+
+          const agent = agents.find((a) => a.id === house.agentId);
+          const popup = L.popup({
+            maxWidth: 320,
+            className: "house-popup-container",
+          }).setContent(createHousePopupContent(house, agent));
+
+          marker.bindPopup(popup);
+
+          marker.on("click", function (this: L.Marker) {
+            if (currentOpenPopup.current === this) {
+              this.closePopup();
+              currentOpenPopup.current = null;
+            } else {
+              if (currentOpenPopup.current) {
+                currentOpenPopup.current.closePopup();
+              }
+              this.openPopup();
+              currentOpenPopup.current = this;
+            }
+          });
+
+          marker.on("popupclose", function (this: L.Marker) {
+            if (currentOpenPopup.current === this) {
+              currentOpenPopup.current = null;
+            }
+          });
+
+          houseMarkersRef.current.push(marker);
+        } catch (error) {
+          console.error(`Error adding marker for house ${house.id}:`, error);
+        }
+      }
+    });
   };
 
   return (

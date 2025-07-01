@@ -641,8 +641,8 @@
     "phone": "965 93 84 70",
     "email": "03020678@edu.gva.es",
     "id": 54,
-    "isVisited": false,
-    "hasQuota": false,
+    "isVisited": true,
+    "hasQuota": true,
     "comments": "",
     "lat": 38.346657575864974,
     "lng": -0.4804256450073453
@@ -653,7 +653,7 @@
     "phone": "965 16 48 18",
     "email": "",
     "id": 55,
-    "isVisited": false,
+    "isVisited": true,
     "hasQuota": false,
     "comments": "",
     "lat": 38.1943933,
@@ -756,18 +756,6 @@
     "lng": -0.4778458
   },
   {
-    "name": "LA PURÍSIMA Y SAN FRANCISCO",
-    "address": "Padre Recaredo de los Ríos, 53, C.P. 03005",
-    "phone": "965 13 25 19",
-    "email": "",
-    "id": 64,
-    "isVisited": false,
-    "hasQuota": false,
-    "comments": "",
-    "lat": 38.3486068,
-    "lng": -0.5036018
-  },
-  {
     "name": "MARÍA AUXILIADORA",
     "address": "Isla de Corfu, 7, C.P. 03005",
     "phone": "965 92 62 15",
@@ -778,18 +766,6 @@
     "comments": "",
     "lat": 38.3564901,
     "lng": -0.5083722
-  },
-  {
-    "name": "MÉDICO PEDRO HERRERO",
-    "address": "Víctor de la Serna, 37, C.P. 03006",
-    "phone": "965 10 24 55",
-    "email": "",
-    "id": 66,
-    "isVisited": false,
-    "hasQuota": false,
-    "comments": "",
-    "lat": 38.3497113,
-    "lng": -0.5163247
   },
   {
     "name": "NAZARET",
@@ -910,18 +886,6 @@
     "comments": "",
     "lat": 38.3628075,
     "lng": -0.4709897
-  },
-  {
-    "name": "SAN JUAN BAUTISTA",
-    "address": "San Agatángelo, 45, C.P. 03007",
-    "phone": "965 10 00 95",
-    "email": "",
-    "id": 77,
-    "isVisited": false,
-    "hasQuota": false,
-    "comments": "",
-    "lat": 38.3412269,
-    "lng": -0.4997832
   },
   {
     "name": "SAN JUAN DE LA CRUZ",
@@ -1104,18 +1068,6 @@
     "lng": -0.4695985
   },
   {
-    "name": "FIGUERAS PACHECO",
-    "address": "Vicente Chavarri, 35, C.P. 03007",
-    "phone": "965 93 64 95",
-    "email": "",
-    "id": 93,
-    "isVisited": false,
-    "hasQuota": false,
-    "comments": "",
-    "lat": 38.3408291,
-    "lng": -0.5105836
-  },
-  {
     "name": "GRAN VÍA",
     "address": "Alonso Cano, 80, C.P. 03012",
     "phone": "965 93 65 25",
@@ -1140,18 +1092,6 @@
     "lng": -0.4731688
   },
   {
-    "name": "JORGE JUAN",
-    "address": "Wenceslao Fernández Flores, 2, C.P. 03004",
-    "phone": "965 93 64 90",
-    "email": "",
-    "id": 96,
-    "isVisited": false,
-    "hasQuota": false,
-    "comments": "",
-    "lat": 38.349688,
-    "lng": -0.4934013
-  },
-  {
     "name": "LAS LOMAS",
     "address": "Barítono Paco Latorre, 1, C.P. 03015",
     "phone": "965 93 65 85",
@@ -1174,30 +1114,6 @@
     "comments": "",
     "lat": 38.3768966,
     "lng": -0.4878975
-  },
-  {
-    "name": "MARE NOSTRUM",
-    "address": "Beato Fco. Castelló Aleu, s/n, C.P. 03008",
-    "phone": "965 93 65 20",
-    "email": "",
-    "id": 99,
-    "isVisited": false,
-    "hasQuota": false,
-    "comments": "",
-    "lat": 38.34985851716826,
-    "lng": -0.4840526292268253
-  },
-  {
-    "name": "MIGUEL HERNÁNDEZ",
-    "address": "Poeta Garcilaso, 8, C.P. 03005",
-    "phone": "965 93 65 45",
-    "email": "",
-    "id": 100,
-    "isVisited": false,
-    "hasQuota": false,
-    "comments": "",
-    "lat": 38.3505255,
-    "lng": -0.4947588
   },
   {
     "name": "PLAYA DE SAN JUAN",
@@ -1260,30 +1176,6 @@
     "lng": -0.4919028
   },
   {
-    "name": "BABEL",
-    "address": "Avda. Lorenzo Carbonell, 16, C.P. 03007",
-    "phone": "965 91 82 40",
-    "email": "03012864@edu.gva.es",
-    "id": 106,
-    "isVisited": false,
-    "hasQuota": false,
-    "comments": "",
-    "lat": 38.3394328,
-    "lng": -0.5162765
-  },
-  {
-    "name": "CENTRO MUNICIPAL DE FORMACIÓN DE PERSONAS ADULTAS",
-    "address": "Calle Padre Mariana, 19, C.P. 03004",
-    "phone": "965 14 38 43",
-    "email": "educacion@alicante.es",
-    "id": 107,
-    "isVisited": false,
-    "hasQuota": false,
-    "comments": "",
-    "lat": 38.3511567,
-    "lng": -0.4868949
-  },
-  {
     "name": "GINER DE LOS RÍOS",
     "address": "Calle Dr. Clavero, s/n, C.P. 03012",
     "phone": "965 91 87 15",
@@ -1296,18 +1188,6 @@
     "lng": -0.4742887
   },
   {
-    "name": "PAULO FREIRE",
-    "address": "Calle Capitán Segarra, 30, C.P. 03004",
-    "phone": "965 91 87 20",
-    "email": "03010715@edu.gva.es",
-    "id": 109,
-    "isVisited": false,
-    "hasQuota": false,
-    "comments": "",
-    "lat": 38.3508375,
-    "lng": -0.4870963
-  },
-  {
     "name": "TÓMBOLA",
     "address": "Travesía Virgen del Puig, s/n, C.P. 03009",
     "phone": "965 91 83 40",
@@ -1318,89 +1198,5 @@
     "comments": "",
     "lat": 38.343206524467256,
     "lng": -0.4789179641144109
-  },
-  {
-    "name": "CONSERVATORIO PROFESIONAL DE DANZA JOSE ESPADERO",
-    "address": "Calle Catedrático Jaume Mas Porcel, C.P. 03005",
-    "phone": "966 47 86 70",
-    "email": "03015038@edu.gva.es",
-    "id": 111,
-    "isVisited": false,
-    "hasQuota": false,
-    "comments": "",
-    "lat": 38.3528144,
-    "lng": -0.4922785
-  },
-  {
-    "name": "CONSERVATORIO PROFESIONAL DE MÚSICA GUITARRISTA JOSE TOMAS",
-    "address": "Calle San Fernando, 30, C.P. 03001",
-    "phone": "965 93 70 10",
-    "email": "03014678@edu.gva.es",
-    "id": 112,
-    "isVisited": false,
-    "hasQuota": false,
-    "comments": "",
-    "lat": 38.3436632,
-    "lng": -0.4837057
-  },
-  {
-    "name": "CONSERVATORIO SUPERIOR DE DANZA",
-    "address": "Calle Catedrático Jaume Mas Porcel, s/n, C.P. 03005",
-    "phone": "965 91 87 45",
-    "email": "03016134@edu.gva.es",
-    "id": 113,
-    "isVisited": false,
-    "hasQuota": false,
-    "comments": "",
-    "lat": 38.3528144,
-    "lng": -0.4922785
-  },
-  {
-    "name": "CONSERVATORIO SUPERIOR DE MÚSICA OSCAR ESPLÁ",
-    "address": "Calle Catedrático Jaume Mas Porcel, s/n, C.P. 03005",
-    "phone": "966 47 86 65",
-    "email": "03016134@edu.gva.es",
-    "id": 114,
-    "isVisited": false,
-    "hasQuota": false,
-    "comments": "",
-    "lat": 38.3528144,
-    "lng": -0.4922785
-  },
-  {
-    "name": "ESCUELA DE ARTE Y SUPERIOR DE DISEÑO DE ALICANTE",
-    "address": "Calle del Clot, 8, C.P. 03011",
-    "phone": "965 93 70 30",
-    "email": "03011124@edu.gva.es",
-    "id": 115,
-    "isVisited": false,
-    "hasQuota": false,
-    "comments": "",
-    "lat": 38.603357,
-    "lng": -0.0433832
-  },
-  {
-    "name": "ESCUELA OFICIAL DE IDIOMAS",
-    "address": "Calle Marqués de Molins, 56, C.P. 03005",
-    "phone": "965 93 70 15",
-    "email": "03011136@edu.gva.es",
-    "id": 116,
-    "isVisited": false,
-    "hasQuota": false,
-    "comments": "",
-    "lat": 38.3492392,
-    "lng": -0.4916591
-  },
-  {
-    "name": "IFPS MARÍTIMO PESQUERO DEL MEDITERRÁNEO",
-    "address": "Muelle Pesquero, s/n, C.P. 03001",
-    "phone": "965 69 56 00",
-    "email": "03002007@edu.gva.es",
-    "id": 117,
-    "isVisited": false,
-    "hasQuota": true,
-    "comments": "",
-    "lat": 38.34574506541743,
-    "lng": -0.48221315391767905
   }
 ]
