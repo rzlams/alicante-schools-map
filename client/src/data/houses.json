@@ -2,15 +2,15 @@
   "houses": [
     {
       "id": 1,
-      "address": "Calle Alonso Cano, Carolinas Altas",
-      "lat": 38.368152,
-      "lng": -0.480752,
-      "price": 750,
-      "warrantyMonths": 1,
+      "address": "Virgen de la Injurias, 7, Alicante",
+      "lat": 38.355608,
+      "lng": -0.469818,
+      "price": 800,
+      "warrantyMonths": 2,
       "requireInsurance": false,
       "comments": "",
-      "agentId": 1,
-      "isVisited": false,
+      "agentId": 2,
+      "isVisited": true,
       "isNotAvailable": false,
       "priority": "HIGH"
     }

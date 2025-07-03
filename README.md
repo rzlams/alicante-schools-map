@@ -2,6 +2,10 @@
 
 An interactive map displaying schools and rental houses in Alicante, Spain. This application allows users to view both educational institutions and rental properties, track visit status, manage quota/availability information, and add comments for each location.
 
+## Get geocoding data
+
+https://developers.google.com/maps/documentation/geocoding/overview?hl=es-419
+
 ## Deployment
 
 ✅ Correct base path: /alicante-schools-map in vite.config.ts
