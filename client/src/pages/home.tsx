@@ -1,74 +1,62 @@
-import {
-  HouseStatsPanel,
-  type HouseFilterType,
-} from "@/components/house-stats-panel";
-import { Map } from "@/components/map";
-import { StatsPanel } from "@/components/stats-panel";
-import type { House } from "@/types/house";
-import type { School } from "@/types/school";
-import { useState } from "react";
+import { HouseStatsPanel, type HouseFilterType } from '@/components/house-stats-panel'
+import { Map } from '@/components/map'
+import { StatsPanel } from '@/components/stats-panel'
+import type { House } from '@/types/house'
+import type { School } from '@/types/school'
+import { useState } from 'react'
 
-export type FilterType = "all" | "visited" | "withoutQuota";
+export type FilterType = 'all' | 'visited' | 'withoutQuota'
 
 export default function Home() {
-  const [schools, setSchools] = useState<School[]>([]);
-  const [houses, setHouses] = useState<House[]>([]);
-  const [selectedFilter, setSelectedFilter] = useState<FilterType>("all");
-  const [selectedHouseFilter, setSelectedHouseFilter] =
-    useState<HouseFilterType>("all");
+  const [schools, setSchools] = useState<School[]>([])
+  const [houses, setHouses] = useState<House[]>([])
+  const [selectedFilter, setSelectedFilter] = useState<FilterType>('all')
+  const [selectedHouseFilter, setSelectedHouseFilter] = useState<HouseFilterType>('all')
 
   const handleSchoolsLoad = (loadedSchools: School[]) => {
-    setSchools(loadedSchools);
-  };
+    setSchools(loadedSchools)
+  }
 
   const handleHousesLoad = (loadedHouses: House[]) => {
-    setHouses(loadedHouses);
-  };
+    setHouses(loadedHouses)
+  }
 
   const handleFilterChange = (filter: FilterType) => {
-    setSelectedFilter(filter);
-  };
+    setSelectedFilter(filter)
+  }
 
   const handleHouseFilterChange = (filter: HouseFilterType) => {
-    setSelectedHouseFilter(filter);
-  };
+    setSelectedHouseFilter(filter)
+  }
 
   // Function to filter schools based on selected filter
-  const getFilteredSchools = (
-    schools: School[],
-    filter: FilterType
-  ): School[] => {
+  const getFilteredSchools = (schools: School[], filter: FilterType): School[] => {
     switch (filter) {
-      case "visited":
-        return schools.filter((school) => school.isVisited && school.hasQuota);
-      case "withoutQuota":
-        return schools.filter((school) => school.isVisited && !school.hasQuota);
-      case "all":
+      case 'visited':
+        return schools.filter((school) => school.isVisited && school.hasQuota)
+      case 'withoutQuota':
+        return schools.filter((school) => school.isVisited && !school.hasQuota)
+      case 'all':
       default:
-        return schools;
+        return schools
     }
-  };
+  }
 
   // Function to filter houses based on selected filter
-  const getFilteredHouses = (
-    houses: House[],
-    filter: HouseFilterType
-  ): House[] => {
+  const getFilteredHouses = (houses: House[], filter: HouseFilterType): House[] => {
     switch (filter) {
-      case "visited":
-        return houses.filter(
-          (house) => house.isVisited && !house.isNotAvailable
-        );
-      case "notAvailable":
-        return houses.filter((house) => house.isNotAvailable);
-      case "all":
+      case 'visited':
+        return houses.filter((house) => house.isVisited && !house.isNotAvailable)
+      case 'notAvailable':
+        return houses.filter((house) => house.isNotAvailable)
+      case 'all':
       default:
-        return houses;
+        return houses
     }
-  };
+  }
 
-  const filteredSchools = getFilteredSchools(schools, selectedFilter);
-  const filteredHouses = getFilteredHouses(houses, selectedHouseFilter);
+  const filteredSchools = getFilteredSchools(schools, selectedFilter)
+  const filteredHouses = getFilteredHouses(houses, selectedHouseFilter)
 
   return (
     <div className="bg-slate-50 font-sans">
@@ -78,30 +66,18 @@ export default function Home() {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-3">
               <div className="flex justify-center items-center bg-blue-600 rounded-lg w-8 h-8">
-                <svg
-                  className="w-5 h-5 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
+                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth="2"
                     d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
                   />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                  />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
               </div>
               <div>
-                <h1 className="font-semibold text-gray-900 text-xl">
-                  Mapa de Colegios y Casas
-                </h1>
+                <h1 className="font-semibold text-gray-900 text-xl">Mapa de Colegios y Pisos en Alquiler</h1>
                 <p className="text-gray-500 text-sm">Alicante, España</p>
               </div>
             </div>
@@ -110,7 +86,13 @@ export default function Home() {
               <div className="hidden sm:flex items-center space-x-2 text-gray-600 text-sm">
                 <span>{schools.length} colegios</span>
                 <span>•</span>
-                <span>{houses.length} casas</span>
+                <span>{houses.length} pisos</span>
+                <span>•</span>
+                <span className="text-blue-600">
+                  <a target="_blank" href="https://w2.alicante.es/zonasescolares/#">
+                    Zonas Escolares
+                  </a>
+                </span>
               </div>
             </div>
           </div>
@@ -126,20 +108,10 @@ export default function Home() {
           selectedHouseFilter={selectedHouseFilter}
         />
 
-        <HouseStatsPanel
-          houses={filteredHouses}
-          selectedFilter={selectedHouseFilter}
-          onFilterChange={handleHouseFilterChange}
-          allHouses={houses}
-        />
+        <HouseStatsPanel houses={filteredHouses} selectedFilter={selectedHouseFilter} onFilterChange={handleHouseFilterChange} allHouses={houses} />
 
-        <StatsPanel
-          schools={filteredSchools}
-          selectedFilter={selectedFilter}
-          onFilterChange={handleFilterChange}
-          allSchools={schools}
-        />
+        <StatsPanel schools={filteredSchools} selectedFilter={selectedFilter} onFilterChange={handleFilterChange} allSchools={schools} />
       </main>
     </div>
-  );
+  )
 }
