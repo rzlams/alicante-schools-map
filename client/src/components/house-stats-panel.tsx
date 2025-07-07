@@ -38,21 +38,21 @@ export function HouseStatsPanel({ houses, selectedFilter, onFilterChange, allHou
   ]
 
   return (
-    <Card className="bottom-4 left-4 z-[1000] absolute bg-white shadow-lg p-4 border border-gray-200 rounded-lg">
+    <Card className="bottom-4 left-4 z-[1000] absolute bg-white shadow-lg p-2 md:p-4 border border-gray-200 rounded-lg">
       <div className="mb-2">
         <h3 className="font-semibold text-gray-700 text-sm">Pisos en Alquiler</h3>
       </div>
-      <div className="gap-4 grid grid-cols-3 text-center">
+      <div className="gap-2 md:gap-4 grid grid-cols-3 text-center">
         {filterSections.map((section) => (
           <div
             key={section.id}
-            className={`cursor-pointer p-2 rounded-md transition-colors duration-200 ${
+            className={`cursor-pointer p-1 md:p-2 rounded-md transition-colors duration-200 ${
               selectedFilter === section.id ? 'bg-gray-100' : 'hover:bg-gray-50'
             }`}
             onClick={() => onFilterChange(section.id)}
           >
-            <div className={`font-bold text-2xl ${section.color}`}>{section.value}</div>
-            <div className="text-gray-500 text-xs">{section.label}</div>
+            <div className={`font-bold text-lg md:text-2xl ${section.color}`}>{section.value}</div>
+            <div className="text-gray-500 text-xs md:text-sm">{section.label}</div>
           </div>
         ))}
       </div>

@@ -61,8 +61,57 @@ https://developers.google.com/maps/documentation/geocoding/overview?hl=es-419
 
 - 📱 Responsive design for mobile and desktop
 - 🎛️ Independent filtering for schools and houses
+- 🔗 **URL-based filters with shareable links**
 - 🗂️ Layered display (houses appear above schools)
 - 🖱️ Toggle popup functionality for all markers
+- 🔄 Browser navigation support (back/forward buttons work with filters)
+
+## URL-Based Filters
+
+The application supports URL query parameters for filters, making it easy to share specific views and bookmark filtered states.
+
+### School Filters
+
+Use the `schoolFilter` query parameter with these values:
+
+- `all` (default) - Shows all schools
+- `visited` - Shows only visited schools with quota available
+- `withoutQuota` - Shows only visited schools without quota
+
+### House Filters
+
+Use the `houseFilter` query parameter with these values:
+
+- `all` (default) - Shows all houses
+- `visited` - Shows only visited houses that are available
+- `notAvailable` - Shows only houses marked as not available
+
+### URL Examples
+
+```
+# Base URL (shows all schools and houses)
+https://rzlams.github.io/alicante-schools-map/
+
+# Show only visited schools with quota
+https://rzlams.github.io/alicante-schools-map/?schoolFilter=visited
+
+# Show only houses that are not available
+https://rzlams.github.io/alicante-schools-map/?houseFilter=notAvailable
+
+# Combined filters: visited schools + not available houses
+https://rzlams.github.io/alicante-schools-map/?schoolFilter=visited&houseFilter=notAvailable
+
+# Show schools without quota + visited houses
+https://rzlams.github.io/alicante-schools-map/?schoolFilter=withoutQuota&houseFilter=visited
+```
+
+### Benefits
+
+- **🔗 Shareable**: Send specific filter combinations via URL
+- **📖 Bookmarkable**: Save frequently used filter states
+- **🔄 Navigation-friendly**: Browser back/forward buttons work correctly
+- **🧹 Clean URLs**: Default 'all' values are omitted for cleaner links
+- **✅ Validation**: Invalid filter values automatically default to 'all'
 
 ## Live Demo
 
@@ -71,6 +120,8 @@ Visit the live application: [https://rzlams.github.io/alicante_schools_map/](htt
 ## Technology Stack
 
 - **Frontend**: React with TypeScript
+- **Routing**: Wouter for client-side routing
+- **State Management**: URL-based filter state with custom hooks
 - **Map**: Leaflet with OpenStreetMap tiles
 - **Styling**: Tailwind CSS
 - **UI Components**: Radix UI primitives with custom shadcn/ui components

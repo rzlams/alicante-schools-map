@@ -1,6 +1,7 @@
-import { HouseStatsPanel, type HouseFilterType } from '@/components/house-stats-panel'
+import { type HouseFilterType } from '@/components/house-stats-panel'
 import { Map } from '@/components/map'
 import { StatsPanel } from '@/components/stats-panel'
+import { useUrlFilters } from '@/hooks/use-url-filters'
 import type { House } from '@/types/house'
 import type { School } from '@/types/school'
 import { useState } from 'react'
@@ -10,8 +11,9 @@ export type FilterType = 'all' | 'visited' | 'withoutQuota'
 export default function Home() {
   const [schools, setSchools] = useState<School[]>([])
   const [houses, setHouses] = useState<House[]>([])
-  const [selectedFilter, setSelectedFilter] = useState<FilterType>('all')
-  const [selectedHouseFilter, setSelectedHouseFilter] = useState<HouseFilterType>('all')
+
+  // Use URL-based filters instead of local state
+  const { schoolFilter, houseFilter, setSchoolFilter, setHouseFilter } = useUrlFilters()
 
   const handleSchoolsLoad = (loadedSchools: School[]) => {
     setSchools(loadedSchools)
@@ -19,14 +21,6 @@ export default function Home() {
 
   const handleHousesLoad = (loadedHouses: House[]) => {
     setHouses(loadedHouses)
-  }
-
-  const handleFilterChange = (filter: FilterType) => {
-    setSelectedFilter(filter)
-  }
-
-  const handleHouseFilterChange = (filter: HouseFilterType) => {
-    setSelectedHouseFilter(filter)
   }
 
   // Function to filter schools based on selected filter
@@ -55,8 +49,8 @@ export default function Home() {
     }
   }
 
-  const filteredSchools = getFilteredSchools(schools, selectedFilter)
-  const filteredHouses = getFilteredHouses(houses, selectedHouseFilter)
+  const filteredSchools = getFilteredSchools(schools, schoolFilter)
+  const filteredHouses = getFilteredHouses(houses, houseFilter)
 
   return (
     <div className="bg-slate-50 font-sans">
@@ -76,20 +70,20 @@ export default function Home() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
               </div>
-              <div>
-                <h1 className="font-semibold text-gray-900 text-xl">Mapa de Colegios y Pisos en Alquiler</h1>
-                <p className="text-gray-500 text-sm">Alicante, España</p>
+              <div className="flex-1 min-w-0">
+                <h1 className="font-semibold text-gray-900 text-lg sm:text-xl leading-tight">Mapa de Colegios y Pisos en Alquiler</h1>
+                <p className="text-gray-500 text-xs sm:text-sm">Alicante, España</p>
               </div>
             </div>
 
-            <div className="flex items-center space-x-4">
-              <div className="hidden sm:flex items-center space-x-2 text-gray-600 text-sm">
-                <span>{schools.length} colegios</span>
-                <span>•</span>
-                <span>{houses.length} pisos</span>
-                <span>•</span>
+            <div className="flex items-center space-x-2 sm:space-x-4">
+              <div className="flex items-center space-x-1 sm:space-x-2 text-gray-600 text-xs sm:text-sm">
+                <span className="hidden sm:inline">{schools.length} colegios</span>
+                <span className="hidden sm:inline">•</span>
+                <span className="hidden sm:inline">{houses.length} pisos</span>
+                <span className="hidden sm:inline">•</span>
                 <span className="text-blue-600">
-                  <a target="_blank" href="https://w2.alicante.es/zonasescolares/#">
+                  <a target="_blank" href="https://w2.alicante.es/zonasescolares/#" className="whitespace-nowrap">
                     Zonas Escolares
                   </a>
                 </span>
@@ -101,16 +95,11 @@ export default function Home() {
 
       {/* Main Content */}
       <main className="relative">
-        <Map
-          onSchoolsLoad={handleSchoolsLoad}
-          onHousesLoad={handleHousesLoad}
-          selectedFilter={selectedFilter}
-          selectedHouseFilter={selectedHouseFilter}
-        />
+        <Map onSchoolsLoad={handleSchoolsLoad} onHousesLoad={handleHousesLoad} selectedFilter={schoolFilter} selectedHouseFilter={houseFilter} />
 
-        <HouseStatsPanel houses={filteredHouses} selectedFilter={selectedHouseFilter} onFilterChange={handleHouseFilterChange} allHouses={houses} />
+        {/* <HouseStatsPanel houses={filteredHouses} selectedFilter={houseFilter} onFilterChange={setHouseFilter} allHouses={houses} /> */}
 
-        <StatsPanel schools={filteredSchools} selectedFilter={selectedFilter} onFilterChange={handleFilterChange} allSchools={schools} />
+        <StatsPanel schools={filteredSchools} selectedFilter={schoolFilter} onFilterChange={setSchoolFilter} allSchools={schools} />
       </main>
     </div>
   )
