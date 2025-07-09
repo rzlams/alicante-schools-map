@@ -943,7 +943,7 @@
     "id": 76,
     "web": "nuke.sanjosedecarolinas.es/",
     "isVisited": true,
-    "hasQuota": true,
+    "hasQuota": false,
     "comments": "Colegio concertado. Tiene bachillerato",
     "lat": 38.36020766312515,
     "lng": -0.48060868817152774
