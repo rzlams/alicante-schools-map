@@ -332,7 +332,7 @@
     "id": 27,
     "web": "portal.edu.gva.es/ceipmanjoncervantes/",
     "isVisited": true,
-    "hasQuota": true,
+    "hasQuota": false,
     "comments": "Público. Abiertos a ayudar",
     "lat": 38.35751260704585,
     "lng": -0.48175670166299045
@@ -904,7 +904,7 @@
     "id": 73,
     "web": "agustinosalicante.es/",
     "isVisited": true,
-    "hasQuota": true,
+    "hasQuota": false,
     "comments": "Colegio concertado. Tiene bachillerato",
     "lat": 38.3719228,
     "lng": -0.4762008
@@ -956,7 +956,7 @@
     "id": 78,
     "web": "colegiosanjuandelacruzalicante.com/",
     "isVisited": true,
-    "hasQuota": true,
+    "hasQuota": false,
     "comments": "Colegio concertado SIN bachillerato. Colegio Laico",
     "lat": 38.3577933,
     "lng": -0.4827884
@@ -982,7 +982,7 @@
     "id": 80,
     "web": "colegiosantateresaalicante.org/",
     "isVisited": true,
-    "hasQuota": true,
+    "hasQuota": false,
     "comments": "Colegio concertado. Tiene bachillerato",
     "lat": 38.3643267,
     "lng": -0.4631085
