@@ -216,7 +216,7 @@
     "web": "",
     "isVisited": true,
     "hasQuota": true,
-    "comments": "Público. Abiertos a ayudar",
+    "comments": "Público. SIN bachillerato. SI tiene plazas disponibles",
     "lat": 38.36646419667491,
     "lng": -0.4815028881712653
   },
@@ -722,7 +722,7 @@
     "id": 57,
     "web": "calasancioalicante.org",
     "isVisited": true,
-    "hasQuota": true,
+    "hasQuota": false,
     "comments": "Colegio concertado. Tiene bachillerato",
     "lat": 38.358431651911715,
     "lng": -0.46810226970587715
@@ -996,7 +996,7 @@
     "web": "colegiofeyda.com/",
     "isVisited": true,
     "hasQuota": true,
-    "comments": "Colegio concertado. Tiene bachillerato",
+    "comments": "Colegio concertado. Tiene bachillerato. SI tiene plazas disponibles",
     "lat": 38.35638656223478,
     "lng": -0.4845830881717094
   },
