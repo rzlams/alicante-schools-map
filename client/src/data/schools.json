@@ -60,7 +60,7 @@
     "web": "https://portal.edu.gva.es/03001571/es/centro/",
     "isVisited": true,
     "hasQuota": true,
-    "comments": "Público",
+    "comments": "Público. No respondieron el correo",
     "lat": 38.364282,
     "lng": -0.480349
   },
@@ -115,19 +115,6 @@
     "comments": "",
     "lat": 38.352936,
     "lng": -0.4963625
-  },
-  {
-    "name": "EL TOSSALET",
-    "address": "Calle Cronista Vicente Martínez Morella, s/n, C.P. 03014",
-    "phone": "965 93 62 00",
-    "email": "03009968@edu.gva.es",
-    "id": 10,
-    "web": "https://portal.edu.gva.es/03009968/",
-    "isVisited": true,
-    "hasQuota": true,
-    "comments": "Es solo preescolar",
-    "lat": 38.3735894,
-    "lng": -0.4776306
   },
   {
     "name": "EMILIO VARELA",
@@ -216,7 +203,7 @@
     "web": "https://portal.edu.gva.es/ceipgloriafuertesalacant/es/",
     "isVisited": true,
     "hasQuota": true,
-    "comments": "Público",
+    "comments": "Público. Me dieron poca información",
     "lat": 38.37757289730892,
     "lng": -0.48683664584323266
   },
@@ -229,7 +216,7 @@
     "web": "https://",
     "isVisited": true,
     "hasQuota": true,
-    "comments": "Público",
+    "comments": "Público. SIN bachillerato. SI tiene plazas disponibles",
     "lat": 38.36646419667491,
     "lng": -0.4815028881712653
   },
@@ -346,7 +333,7 @@
     "web": "https://portal.edu.gva.es/ceipmanjoncervantes/",
     "isVisited": true,
     "hasQuota": true,
-    "comments": "Público. Edificio de 4 pisos y una cancha grande",
+    "comments": "Público. Abiertos a ayudar. Edificio de 4 pisos y una cancha grande",
     "lat": 38.35751260704585,
     "lng": -0.48175670166299045
   },
@@ -372,7 +359,7 @@
     "web": "https://portal.edu.gva.es/ceipmontebenacantil/es/centro/",
     "isVisited": true,
     "hasQuota": true,
-    "comments": "Público",
+    "comments": "Público. No respondieron el correo",
     "lat": 38.4191326,
     "lng": -0.4467953
   },
@@ -398,7 +385,7 @@
     "web": "https://portal.edu.gva.es/ceip9octubrealicante/es/centro/",
     "isVisited": true,
     "hasQuota": true,
-    "comments": "Público",
+    "comments": "Público. Abiertos a ayudar",
     "lat": 38.35985338934596,
     "lng": -0.4810075188615775
   },
@@ -567,7 +554,7 @@
     "web": "https://",
     "isVisited": true,
     "hasQuota": true,
-    "comments": "",
+    "comments": "Público. No respondieron el correo",
     "lat": 38.37837389411011,
     "lng": -0.48347344615511834
   },
@@ -593,7 +580,7 @@
     "web": "https://portal.edu.gva.es/virgendelremedio/es/centro/",
     "isVisited": true,
     "hasQuota": true,
-    "comments": "Público",
+    "comments": "Público. No respondieron el correo",
     "lat": 38.371056,
     "lng": -0.4860183
   },
@@ -735,7 +722,7 @@
     "id": 57,
     "web": "https://calasancioalicante.org",
     "isVisited": true,
-    "hasQuota": true,
+    "hasQuota": false,
     "comments": "Colegio concertado. Tiene bachillerato",
     "lat": 38.358431651911715,
     "lng": -0.46810226970587715
@@ -917,7 +904,7 @@
     "id": 73,
     "web": "https://agustinosalicante.es/",
     "isVisited": true,
-    "hasQuota": true,
+    "hasQuota": false,
     "comments": "Colegio concertado. Tiene bachillerato",
     "lat": 38.3719228,
     "lng": -0.4762008
@@ -956,7 +943,7 @@
     "id": 76,
     "web": "https://nuke.sanjosedecarolinas.es/",
     "isVisited": true,
-    "hasQuota": true,
+    "hasQuota": false,
     "comments": "Colegio concertado. Tiene bachillerato",
     "lat": 38.36020766312515,
     "lng": -0.48060868817152774
@@ -969,7 +956,7 @@
     "id": 78,
     "web": "https://colegiosanjuandelacruzalicante.com/",
     "isVisited": true,
-    "hasQuota": true,
+    "hasQuota": false,
     "comments": "Colegio concertado SIN bachillerato. Colegio Laico",
     "lat": 38.3577933,
     "lng": -0.4827884
@@ -995,7 +982,7 @@
     "id": 80,
     "web": "https://colegiosantateresaalicante.org/",
     "isVisited": true,
-    "hasQuota": true,
+    "hasQuota": false,
     "comments": "Colegio concertado. Tiene bachillerato",
     "lat": 38.3643267,
     "lng": -0.4631085
